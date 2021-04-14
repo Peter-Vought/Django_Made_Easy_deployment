@@ -2,7 +2,7 @@
 
 <p>
   The deployment process might get tricky, and opportunities for error are easy to find. The
-  following chapter serves as a step-by-step deployment guide and is based on
+  following text serves as a step-by-step deployment guide and is based on
   <a href="https://www.digitalocean.com/">DigitalOcean</a> documents 
   <a href="https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-20-04">Initial Server Setup with Ubuntu 20.04</a> and
   <a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-20-04">How To Set Up
