@@ -3,15 +3,15 @@
 <p>
   The deployment process might get tricky, and opportunities for error are easy to find. The
   following text serves as a step-by-step deployment guide and is based on
-  <a href="https://www.digitalocean.com/">DigitalOcean</a> documents 
-  <a href="https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-20-04">Initial Server Setup with Ubuntu 20.04</a> and
-  <a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-20-04">How To Set Up
+  <a href="https://www.digitalocean.com/" target="_blank">DigitalOcean</a> documents 
+  <a href="https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-20-04" target="_blank">Initial Server Setup with Ubuntu 20.04</a> and
+  <a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-20-04" target="_blank">How To Set Up
   Django with Postgres, Nginx, and Gunicorn on Ubuntu 20.04</a>.
 </p>
 <p>
   We will start by setting up our Virtual Private Server along with the PostgreSQL database
-  and virtual environment. We will configure the <a href="https://gunicorn.org/">Gunicorn</a> application server to interface
-  with our applications and set up <a href="https://www.nginx.com/">Nginx</a> to reverse proxy to Gunicorn, giving us access to
+  and virtual environment. We will configure the <a href="https://gunicorn.org/" target="_blank">Gunicorn</a> application server to interface
+  with our applications and set up <a href="https://www.nginx.com/" target="_blank">Nginx</a> to reverse proxy to Gunicorn, giving us access to
   its security and performance features to serve our apps. As a final step, we will go through
   custom domain setup and adding an SSL certificate to our website.
 </p>
@@ -20,7 +20,7 @@
 
 <p>
   We will use the DigitalOcean cloud hosting provider to house our project. If you haven’t
-  created your account yet, you can use this <a href="https://m.do.co/c/36d391016ef7">link</a> to register and get free $100 credit to start.
+  created your account yet, you can use this <a href="https://m.do.co/c/36d391016ef7" target="_blank">link</a> to register and get free $100 credit to start.
 </p>
 
 <h3>Creating Droplet</h3>
@@ -39,7 +39,7 @@
 <p>
   We don’t have any SSH keys available as of now. Let’s go ahead and create one. In case
   you are running Windows, the ssh key creation process might be slightly different to
-  macOS/Linux. If unsure, follow this <a href="https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh">guide</a>. 
+  macOS/Linux. If unsure, follow this <a href="https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh" target="_blank">guide</a>. 
   For macOS and Linux, open your terminal and type the following command:<br><br>
   <strong><i>terminal</i></strong><br>
   ~$ ssh-keygen<br><br>
