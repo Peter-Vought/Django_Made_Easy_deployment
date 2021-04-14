@@ -108,3 +108,65 @@
 </p>
 
 <h3>Creating a new user and updating security settings</h3>
+
+<p>
+  We don’t want to use the root user for handling our project on the server for security
+  reasons. The root user is the administrative user in a Linux environment that has very
+  broad privileges. Because of the heightened privileges of the root account, we are
+  discouraged from using it regularly. This is because part of the power inherent with the
+  root account is the ability to make very destructive changes, even by accident.
+</p>
+
+<p>
+  Let’s go ahead and create a new user account now. Feel free to use any name you like. I
+  will go with <i>finesaucesadmin</i>. Use the following command to create the user:<br><br>
+  <strong><i>terminal</i></strong><br>
+  # adduser finesaucesadmin<br><br>
+  Follow instructions in the terminal. Make sure you provide some secure password. You
+  can go with the default, blank values for contact information fields:<br><br>
+  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  Adding user `finesaucesadmin' ...<br>
+  Adding new group `finesaucesadmin' (1000) ...<br>
+  Adding new user `finesaucesadmin' (1000) with group `finesaucesadmin' ...<br>
+  Creating home directory `/home/finesaucesadmin' ...<br>
+  Copying files from `/etc/skel' ...<br>
+  Enter new UNIX password:<br>
+  Retype new UNIX password:<br>
+  passwd: password updated successfully<br>
+  Changing the user information for finesaucesadmin<br>
+  Enter the new value, or press ENTER for the default<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Full Name []:<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Room Number []:<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Work Phone []:<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Home Phone []:<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Other []:<br>
+  Is the information correct? [Y/n] Y<br><br>
+  Now, we have a new user account with regular account privileges. However, we may
+  occasionally need to perform administrative tasks. Let’s give our new user admin
+  privileges. To add these privileges to our new user, we need to add the user to the sudo
+  group:<br><br>
+  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  # usermod -aG sudo finesaucesadmin<br><br>
+  In order to be able to log in via ssh as a new user, we need to set up SSH keys on the server.
+  Navigate to our new users home folder:<br><br>
+  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  # cd /home/finesaucesadmin<br><br>
+  Create <i>.ssh</i> directory:<br><br>
+  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  /home/finesaucesadmin# mkdir .ssh<br><br>
+  Move into this directory by using the <i>cd</i> command:<br><br>
+  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  /home/finesaucesadmin# cd .ssh<br><br>
+  Once inside <i>.ssh</i> folder, create <i>authorized_keys</i> file:<br><br>
+  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  /home/finesaucesadmin/.ssh# nano authorized_keys<br><br>
+  Your terminal windows will turn into a simple text editor.Here we need to paste our SSH key. We can either generate a new one or use one we
+  already have on our local machine. Let’s use that one. Open a new terminal window and
+  use the following command to copy the contents of the <i>id_rsa_do.pub</i> file:<br><br>
+   <strong><i>terminal</i></strong><br>
+  ~$ cat ~/.ssh/id_rsa_do.pub<br><br>
+  Paste it to <i>authorized_keys</i> file opened in a terminal window.<br>
+  Press <i>CONTROL-X</i> to save the file. Confirm changes by pressing <i>Y</i>. Then press <i>ENTER</i> to
+  confirm <i>file name: authorized_keys</i>.
+
+</p>
