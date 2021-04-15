@@ -227,6 +227,88 @@
   configure additional services, you will need to adjust the firewall settings to allow traffic in.
 </p>
 
+<h2>Installing software</h2>
 <p>
-  
+  We will start by updating our server packages. Run the following commands to get up to
+  date:<br><br>
+  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  ~$ sudo apt update<br>
+  ~$ sudo apt upgrade<br><br>
+  You will be asked about installing new packages. Select Y to confirm:<br><br>
+  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  After this operation, 175 MB of additional disk space will be used.<br>
+  Do you want to continue? [Y/n] Y<br><br>
+  Let’s install Python3, Postgres, NGINX and rabbitmq-server now. Use the following
+  command:<br><br>
+  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  ~$ sudo apt install python3-pip python3-dev libpq-dev postgresql postgresql-contrib
+  nginx curl rabbitmq-server<br><br>
+  Select Y to confirm installation:<br><br>
+  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  After this operation, 608 MB of additional disk space will be used.
+  Do you want to continue? [Y/n] Y<br><br>
+  After installation finishes, we can continue by installing WeasyPrint dependencies:<br><br>
+  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  ~$ sudo apt-get install build-essential python3-dev python3-pip python3-setuptools
+  python3-wheel python3-cffi libcairo2 libpango-1.0-0 libpangocairo-1.0-0 libgdkpixbuf2.0-0 libffi-dev shared-mime-info<br><br>
+  Confirm the installation to continue:<br><br>
+  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  After this operation, 7695 kB of additional disk space will be used.<br>
+  Do you want to continue? [Y/n] Y<br>
+</p>
+<h3>Database setup</h3>
+<p>
+  Let’s set up our PostgreSQL database. Log in to the database session:<br><br>
+  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  ~$ sudo -u postgres psql<br><br>
+  and create finesauces database:<br><br>
+  <strong><i>postgres terminal</i></strong><br>
+  postgres=# CREATE DATABASE finesauces;<br><br>
+  Create a user for the database (I will use the same credentials here as on my local machine
+  during development):<br><br>
+  <strong><i>postgres terminal</i></strong><br>
+  postgres=# CREATE USER finesaucesadmin WITH PASSWORD '********';<br><br>
+  As we already did at the beginning of our project during local development setup, set
+  default encoding, transaction isolation scheme, and timezone (Recommended from
+  Django team):<br><br>
+  <strong><i>postgres terminal</i></strong><br>
+  postgres=# ALTER ROLE finesaucesadmin SET client_encoding TO 'utf8';<br>
+  postgres=# ALTER ROLE finesaucesadmin SET default_transaction_isolation TO 'read committed';<br>
+  postgres=# ALTER ROLE finesaucesadmin SET timezone TO 'UTC';<br><br>
+  Grant <i>finesaucesadmin</i> user access to administer our database:<br><br>
+  <strong><i>postgres terminal</i></strong><br>
+  postgres=# GRANT ALL PRIVILEGES ON DATABASE finesauces TO finesaucesadmin;<br><br>
+  We can quit the PostgreSQL session now.<br><br>
+  <strong><i>postgres terminal</i></strong><br>
+  postgres=# \q<br><br>
+</p>
+<h2>Virtual environment</h2>
+<p>
+  Before cloning up our project from the remote repository, we need to set up our virtual
+  environment. To do so, we first have to install the python3 <i>venv</i> package. Install the
+  package by typing:<br><br>
+  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  ~$ sudo apt-get install python3-venv<br><br>
+  After installing the <i>venv</i> package, we can proceed by creating and moving into our
+  <i>django_projects</i> project directory, where our current and future projects will reside:<br><br>
+  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  ~$ mkdir django_projects<br>
+  ~$ cd django_projects<br><br>
+  When inside our new project directory, clone remote repository (replace the link with your
+  repository URL):<br><br>
+  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  ~/django_projects$ git clone https://peter-vought@bitbucket.org/petervought/finesauces.git<br><br>
+  Once our project is copied into the <i>django_projects</i> directory, move inside that project:<br><br>
+  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  ~/django_projects$ cd finesauces/<br><br>
+  and create a virtual environment:<br><br>
+  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  ~/django_projects/finesauces$ python3 -m venv env<br><br>
+  Activate the environment:<br><br>
+  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  ~/django_projects/finesauces$ source env/bin/activate<br><br>
+  Now we can go ahead and install our Python dependencies listed in the <i>requirements.txt</i>
+  file:<br><br>
+  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  (env)~/django_projects/finesauces$ pip install -r requirements.txt<br><br>
 </p>
