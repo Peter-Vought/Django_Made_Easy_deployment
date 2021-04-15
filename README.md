@@ -1,5 +1,6 @@
-<h1>Django_Made_Easy_deployment 🚀</h1>
-
+# Django_Made_Easy_deployment 🚀
+## Table of contents
+* [1 VPS access and security](#1-vps-access-and-security)
 <p>
   The deployment process might get tricky, and opportunities for error are easy to find. The
   following text serves as a step-by-step deployment guide and is based on
@@ -16,7 +17,7 @@
   custom domain setup and adding an SSL certificate to our website.
 </p>
 
-<h2>1 VPS access and security</h2>
+## 1 VPS access and security
 
 <p>
   We will use the DigitalOcean cloud hosting provider to house our project. If you haven’t
