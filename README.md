@@ -1,6 +1,6 @@
 # Django_Made_Easy_deployment 🚀
 ## Table of contents
-* [1 VPS access and security](#1-vps-access-and-security)
+## * [1 VPS access and security](#1-vps-access-and-security)
 * [1.1 Creating Droplet](#11-creating-droplet)
 * [1.2 Creating SSH key](#12-creating-ssh-key)
 * [1.3 Logging into Droplet](#13-logging-into-droplet)
