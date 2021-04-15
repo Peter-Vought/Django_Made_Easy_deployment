@@ -14,28 +14,24 @@
 * [6 Domain setup](#6-domain-setup)
 * [7 Setting up SSL certificate](#7-setting-up-ssl-certificate)
 <hr>
-<p>
+
   The deployment process might get tricky, and opportunities for error are easy to find. The
   following text serves as a step-by-step deployment guide and is based on
   <a href="https://www.digitalocean.com/">DigitalOcean</a> documents 
   <a href="https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-20-04">Initial Server Setup with Ubuntu 20.04</a> and
   <a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-20-04">How To Set Up
   Django with Postgres, Nginx, and Gunicorn on Ubuntu 20.04</a>.
-</p>
-<p>
+
   We will start by setting up our Virtual Private Server along with the PostgreSQL database
   and virtual environment. We will configure the <a href="https://gunicorn.org/">Gunicorn</a> application server to interface
   with our applications and set up <a href="https://www.nginx.com/">Nginx</a> to reverse proxy to Gunicorn, giving us access to
   its security and performance features to serve our apps. As a final step, we will go through
   custom domain setup and adding an SSL certificate to our website.
-</p>
 
 ## 1 VPS access and security
 
-<p>
   We will use the DigitalOcean cloud hosting provider to house our project. If you haven’t
   created your account yet, you can use this <a href="https://m.do.co/c/36d391016ef7">link</a> to register and get free $100 credit to start.
-</p>
 
 ### 1.1 Creating Droplet
 
