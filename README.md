@@ -44,7 +44,7 @@
 
   We don’t have any SSH keys available as of now. Let’s go ahead and create one. In case
   you are running Windows, the ssh key creation process might be slightly different to
-  macOS/Linux. If unsure, follow this <a href="https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh">guide</a>. 
+  macOS/Linux. If unsure, follow this [guide](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh). 
   For macOS and Linux, open your terminal and type the following command:
   
   ***``terminal``***
@@ -163,46 +163,73 @@
   Let’s go ahead and create a new user account now. Feel free to use any name you like. I
   will go with *finesaucesadmin*. Use the following command to create the user:
   
-  ***terminal***
-  # adduser finesaucesadmin<br><br>
+  ***``Ubuntu 20.04.5 LTS terminal``***
+  ```
+  adduser finesaucesadmin
+  ```
+  
   Follow instructions in the terminal. Make sure you provide some secure password. You
-  can go with the default, blank values for contact information fields:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
-  Adding user `finesaucesadmin' ...<br>
-  Adding new group `finesaucesadmin' (1000) ...<br>
-  Adding new user `finesaucesadmin' (1000) with group `finesaucesadmin' ...<br>
-  Creating home directory `/home/finesaucesadmin' ...<br>
-  Copying files from `/etc/skel' ...<br>
-  Enter new UNIX password:<br>
-  Retype new UNIX password:<br>
-  passwd: password updated successfully<br>
-  Changing the user information for finesaucesadmin<br>
-  Enter the new value, or press ENTER for the default<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Full Name []:<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Room Number []:<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Work Phone []:<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Home Phone []:<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Other []:<br>
-  Is the information correct? [Y/n] Y<br><br>
+  can go with the default, blank values for contact information fields:
+  
+  ***``Ubuntu 20.04.5 LTS terminal``***
+  ```
+  Adding user `finesaucesadmin' ...
+  Adding new group `finesaucesadmin' (1000) ...
+  Adding new user `finesaucesadmin' (1000) with group `finesaucesadmin' ...
+  Creating home directory `/home/finesaucesadmin' ...
+  Copying files from `/etc/skel' ...
+  Enter new UNIX password:
+  Retype new UNIX password:
+  passwd: password updated successfully
+  Changing the user information for finesaucesadmin
+  Enter the new value, or press ENTER for the default
+         Full Name []:
+         Room Number []:
+         Work Phone []:
+         Home Phone []:
+         Other []:
+  Is the information correct? [Y/n] Y
+  ```
+  
   Now, we have a new user account with regular account privileges. However, we may
   occasionally need to perform administrative tasks. Let’s give our new user admin
   privileges. To add these privileges to our new user, we need to add the user to the sudo
-  group:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
-  # usermod -aG sudo finesaucesadmin<br><br>
+  group:
+  
+  ***``Ubuntu 20.04.5 LTS terminal``***
+  ```
+  # usermod -aG sudo finesaucesadmin
+  ```
+  
   In order to be able to log in via ssh as a new user, we need to set up SSH keys on the server.
-  Navigate to our new users home folder:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
-  # cd /home/finesaucesadmin<br><br>
-  Create <i>.ssh</i> directory:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
-  /home/finesaucesadmin# mkdir .ssh<br><br>
-  Move into this directory by using the <i>cd</i> command:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
-  /home/finesaucesadmin# cd .ssh<br><br>
-  Once inside <i>.ssh</i> folder, create <i>authorized_keys</i> file:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
-  /home/finesaucesadmin/.ssh# nano authorized_keys<br><br>
+  Navigate to our new users home folder:
+  
+  ***``Ubuntu 20.04.5 LTS terminal``***
+  ```
+  # cd /home/finesaucesadmin
+  ```
+  
+  Create *.ssh* directory:
+  
+  ***``Ubuntu 20.04.5 LTS terminal``***
+  ```
+  /home/finesaucesadmin# mkdir .ssh
+  ```
+  
+  Move into this directory by using the <i>cd</i> command:
+  
+  ***``Ubuntu 20.04.5 LTS terminal``***
+  ```
+  /home/finesaucesadmin# cd .ssh
+  ```
+  
+  Once inside *.ssh* folder, create *authorized_keys* file:
+  
+  ***``Ubuntu 20.04.5 LTS terminal``***
+  ```
+  /home/finesaucesadmin/.ssh# nano authorized_keys
+  ```
+  
   Your terminal windows will turn into a simple text editor.Here we need to paste our SSH key. We can either generate a new one or use one we
   already have on our local machine. Let’s use that one. Open a new terminal window and
   use the following command to copy the contents of the <i>id_rsa_do.pub</i> file:<br><br>
