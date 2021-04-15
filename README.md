@@ -76,26 +76,25 @@
 
 ### 1.3 Logging into Droplet
 
-<p>
   Let’s try connecting to our Droplet. Open terminal and type the following command
-  (replace <i>104.131.185.203</i> with your IP address):<br></br>
-  <strong><i>terminal</i></strong><br>
-  ~$ ssh root@104.131.185.203<br></br>
+  (replace <i>104.131.185.203</i> with your IP address):
+  <strong><i>``terminal``</i></strong><br>
+  ``~$ ssh root@104.131.185.203``
   When logging in for the first time, you will most probably receive the following
-  notification:<br><br>
-  <strong><i>terminal</i></strong><br>
-  The authenticity of host '104.131.185.203 (104.131.185.203)' can't be established.<br>
-  ECDSA key fingerprint is SHA256:B8ePWNEy7jjmhamtQkHi1w6HsumydXKxftmrWD4ufj8.<br>
-  Are you sure you want to continue connecting (yes/no/[fingerprint])? Yes<br><br>
-  You might also receive the following message:<br><br>
-  <strong><i>terminal</i></strong><br>
-  root@ 104.131.185.203: Permission denied(publickey)<br><br>
-  In this case, run the following command to add the key to ssh-agent:<br><br>
-  <strong><i>terminal</i></strong><br>
-  ~$ ssh-add ~/.ssh/id_rsa_do<br><br>
-  and try to connect again:<br><br>
-  <strong><i>terminal</i></strong><br>
-  ~$ ssh root@104.131.185.203<br><br>
+  notification:
+  <strong><i>``terminal``</i></strong><br>
+  ``The authenticity of host '104.131.185.203 (104.131.185.203)' can't be established.``<br>
+  ``ECDSA key fingerprint is SHA256:B8ePWNEy7jjmhamtQkHi1w6HsumydXKxftmrWD4ufj8.``<br>
+  ``Are you sure you want to continue connecting (yes/no/[fingerprint])? Yes``<br>
+  You might also receive the following message:
+  <strong><i>``terminal``</i></strong><br>
+  ``root@ 104.131.185.203: Permission denied(publickey)``<br>
+  In this case, run the following command to add the key to ssh-agent:
+  <strong><i>``terminal``</i></strong><br>
+  ``~$ ssh-add ~/.ssh/id_rsa_do``<br>
+  and try to connect again:
+  <strong><i>``terminal``</i></strong><br>
+  ``~$ ssh root@104.131.185.203``<br>
   Upon successfully logging into our server, we are greeted by the following report:<br><br>
   <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
   Welcome to Ubuntu 20.04.1 LTS (GNU/Linux 5.4.0-51-generic x86_64)<br><br>
