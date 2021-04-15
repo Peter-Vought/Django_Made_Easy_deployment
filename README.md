@@ -520,3 +520,34 @@
   Our e-commerce project is now successfully deployed. Let’s try to access our site by using 
   Droplet IP address http://104.131.185.203/.
 </p>
+<h2>Domain setup</h2>
+<p>
+  To obtain a custom domain, we will need to use the service of a domain registrar. There
+  are many options to choose from. One of them would be <a href="https://www.namecheap.com/">Namecheap</a>. You can use
+  whichever registrar you like. All of their interfaces will look almost identical.<br><br>
+  Once you choose your domain registrar, log in to your account, and purchase a custom
+  domain that you like. Inside the domain dashboard, look for <i>DNS</i> settings. There, we will
+  need to create <i>A</i> and <i>CNAME</i> records: We will start with A record. For <i>Host</i> value, use @
+  symbol, and for <i>IP</i> address, use your Droplet’s IP address.<br></br>
+  As for <i>CNAME</i>, set <i>Host</i> value to <i>www</i>. As a target value, provide your actual domain
+  value. In my case, that would be <i>finesauces.store</i>.<br><br>
+  Now we need to return to <i>local_settings.py</i> and update </i>ALLOWED_HOSTS to include our
+  domain:<br><br>
+  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  ~/django_projects/finesauces/finesauces_project$ sudo nano local_settings.py<br><br>
+  Add the domain in the following way:<br><br>
+  ALLOWED_HOSTS = ['104.131.185.203', <strong>'finesauces.store', 'www.finesauces.store'</strong>]<br><br>
+  We also need to update <i>/etc/nginx/sites-available/finesauces</i> file to include our domain:<br><br>
+  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  ~/django_projects/finesauces$ sudo nano /etc/nginx/sites-available/finesauces<br><br>
+  Add our domain like this next to our Droplet’s IP address:<br><br>
+  <strong><i>/etc/nginx/sites-available/finesauces</i></strong><br>
+  server_name 104.131.185.203 <strong>finesauces.store www.finesauces.store;</strong><br><br>
+  Reload NGINX & Gunicorn for updates to take effect:<br><br>
+  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  ~/django_projects/finesauces$ sudo systemctl restart nginx<br>
+  ~/django_projects/finesauces$ sudo systemctl restart gunicorn<br><br>
+  Our e-commerce site is now available at <a href="http://finesauces.store/">http://finesauces.store/</a>.
+
+
+</p>
