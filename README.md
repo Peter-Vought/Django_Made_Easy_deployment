@@ -2,17 +2,17 @@
 ## Table of contents
 * [1 VPS access and security](#1-vps-access-and-security)
 * [1.1 Creating Droplet](#11-creating-droplet)
-* [1 VPS access and security](#1-vps-access-and-security)
-* [1 VPS access and security](#1-vps-access-and-security)
-* [1 VPS access and security](#1-vps-access-and-security)
-* [1 VPS access and security](#1-vps-access-and-security)
-* [1 VPS access and security](#1-vps-access-and-security)
-* [1 VPS access and security](#1-vps-access-and-security)
-* [1 VPS access and security](#1-vps-access-and-security)
-* [1 VPS access and security](#1-vps-access-and-security)
-* [1 VPS access and security](#1-vps-access-and-security)
-* [1 VPS access and security](#1-vps-access-and-security)
-* [1 VPS access and security](#1-vps-access-and-security)
+* [1.2 Creating SSH key](#12-creating-ssh-key)
+* [1.3 Logging into Droplet](#13-logging-into-droplet)
+* [1.4 Creating new user and updating security settings](#14-creating-new-user-and-updating-security-settings)
+* [2 Installing software](#2-installing-software)
+* [2.1 Database setup](#21-database-setup)
+* [3 Virtual environment](#3-virtual-environment)
+* [3.1 Settings and migrations](#31-settings-and-migrations)
+* [4 Gunicorn setup](#4-gunicorn-setup)
+* [5 NGINX setup](#5-nginx-setup)
+* [6 Domain setup](#6-domain-setup)
+* [7 Setting up SSL certificate](#7-setting-up-ssl-certificate)
 <p>
   The deployment process might get tricky, and opportunities for error are easy to find. The
   following text serves as a step-by-step deployment guide and is based on
