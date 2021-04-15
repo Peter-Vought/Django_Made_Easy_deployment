@@ -345,62 +345,103 @@
 
 ## 2 Installing software
 
-<p>
   We will start by updating our server packages. Run the following commands to get up to
-  date:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
-  ~$ sudo apt update<br>
-  ~$ sudo apt upgrade<br><br>
-  You will be asked about installing new packages. Select Y to confirm:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
-  After this operation, 175 MB of additional disk space will be used.<br>
-  Do you want to continue? [Y/n] Y<br><br>
+  date:
+  
+  ***``Ubuntu 20.04.5 LTS terminal``***
+  ```
+  ~$ sudo apt update
+  ~$ sudo apt upgrade
+  ```
+  
+  You will be asked about installing new packages. Select Y to confirm:
+  
+  ***``Ubuntu 20.04.5 LTS terminal``***
+  ```
+  After this operation, 175 MB of additional disk space will be used.
+  Do you want to continue? [Y/n] Y
+  ```
+  
   Let’s install Python3, Postgres, NGINX and rabbitmq-server now. Use the following
-  command:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
-  ~$ sudo apt install python3-pip python3-dev libpq-dev postgresql postgresql-contrib
-  nginx curl rabbitmq-server<br><br>
-  Select Y to confirm installation:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  command:
+  
+  ***``Ubuntu 20.04.5 LTS terminal``***
+  ```
+  ~$ sudo apt install python3-pip python3-dev libpq-dev postgresql postgresql-contrib nginx curl rabbitmq-server
+  ```
+  
+  Select Y to confirm installation:
+  
+  ***``Ubuntu 20.04.5 LTS terminal``***
+  ```
   After this operation, 608 MB of additional disk space will be used.
-  Do you want to continue? [Y/n] Y<br><br>
-  After installation finishes, we can continue by installing WeasyPrint dependencies:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  Do you want to continue? [Y/n] Y
+  ```
+  
+  After installation finishes, we can continue by installing WeasyPrint dependencies:
+  
+  ***``Ubuntu 20.04.5 LTS terminal``***
+  ```
   ~$ sudo apt-get install build-essential python3-dev python3-pip python3-setuptools
-  python3-wheel python3-cffi libcairo2 libpango-1.0-0 libpangocairo-1.0-0 libgdkpixbuf2.0-0 libffi-dev shared-mime-info<br><br>
-  Confirm the installation to continue:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
-  After this operation, 7695 kB of additional disk space will be used.<br>
-  Do you want to continue? [Y/n] Y<br>
-</p>
+  python3-wheel python3-cffi libcairo2 libpango-1.0-0 libpangocairo-1.0-0 libgdkpixbuf2.0-0 libffi-dev shared-mime-info
+  ```
+  
+  Confirm the installation to continue:
+  
+  ***``Ubuntu 20.04.5 LTS terminal``***
+  ```
+  After this operation, 7695 kB of additional disk space will be used.
+  Do you want to continue? [Y/n] Y
+  ```
 
 ### 2.1 Database setup
 
-<p>
-  Let’s set up our PostgreSQL database. Log in to the database session:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
-  ~$ sudo -u postgres psql<br><br>
-  and create finesauces database:<br><br>
-  <strong><i>postgres terminal</i></strong><br>
-  postgres=# CREATE DATABASE finesauces;<br><br>
+  Let’s set up our PostgreSQL database. Log in to the database session:
+  
+  ***``Ubuntu 20.04.5 LTS terminal``***
+  ```
+  ~$ sudo -u postgres psql
+  ```
+  
+  and create finesauces database:
+  
+  ***``postgres terminal``***
+  ```
+  postgres=# CREATE DATABASE finesauces;
+  ```
+  
   Create a user for the database (I will use the same credentials here as on my local machine
-  during development):<br><br>
-  <strong><i>postgres terminal</i></strong><br>
-  postgres=# CREATE USER finesaucesadmin WITH PASSWORD '********';<br><br>
+  during development):
+  
+  ***``postgres terminal</i>``***
+  ```
+  postgres=# CREATE USER finesaucesadmin WITH PASSWORD '********';
+  ```
+  
   As we already did at the beginning of our project during local development setup, set
   default encoding, transaction isolation scheme, and timezone (Recommended from
-  Django team):<br><br>
-  <strong><i>postgres terminal</i></strong><br>
-  postgres=# ALTER ROLE finesaucesadmin SET client_encoding TO 'utf8';<br>
-  postgres=# ALTER ROLE finesaucesadmin SET default_transaction_isolation TO 'read committed';<br>
-  postgres=# ALTER ROLE finesaucesadmin SET timezone TO 'UTC';<br><br>
-  Grant <i>finesaucesadmin</i> user access to administer our database:<br><br>
-  <strong><i>postgres terminal</i></strong><br>
-  postgres=# GRANT ALL PRIVILEGES ON DATABASE finesauces TO finesaucesadmin;<br><br>
-  We can quit the PostgreSQL session now.<br><br>
-  <strong><i>postgres terminal</i></strong><br>
-  postgres=# \q<br><br>
-</p>
+  Django team):
+  
+  ***``postgres terminal``***
+  ```
+  postgres=# ALTER ROLE finesaucesadmin SET client_encoding TO 'utf8';
+  postgres=# ALTER ROLE finesaucesadmin SET default_transaction_isolation TO 'read committed';
+  postgres=# ALTER ROLE finesaucesadmin SET timezone TO 'UTC';
+  ```
+  
+  Grant <i>finesaucesadmin</i> user access to administer our database:
+  
+  ***``postgres terminal``***
+  ```
+  postgres=# GRANT ALL PRIVILEGES ON DATABASE finesauces TO finesaucesadmin;
+  ```
+  
+  We can quit the PostgreSQL session now.
+  
+  ***``postgres terminal``***
+  ```
+  postgres=# \q
+  ```
 
 ## 3 Virtual environment
 
