@@ -232,72 +232,115 @@
   
   Your terminal windows will turn into a simple text editor.Here we need to paste our SSH key. We can either generate a new one or use one we
   already have on our local machine. Let’s use that one. Open a new terminal window and
-  use the following command to copy the contents of the <i>id_rsa_do.pub</i> file:<br><br>
-   <strong><i>terminal</i></strong><br>
-  ~$ cat ~/.ssh/id_rsa_do.pub<br><br>
-  Paste it to <i>authorized_keys</i> file opened in a terminal window.<br>
-  Press <i>CONTROL-X</i> to save the file. Confirm changes by pressing <i>Y</i>. Then press <i>ENTER</i> to
-  confirm <i>file name: authorized_keys</i>.
-</p>
+  use the following command to copy the contents of the <i>id_rsa_do.pub</i> file:
+  
+  ***``terminal``***
+  ```
+  ~$ cat ~/.ssh/id_rsa_do.pub
+  ```
+  
+  Paste it to <i>authorized_keys</i> file opened in a terminal window.
+  Press <i>CONTROL-X</i> to save the file. Confirm changes by pressing <i>Y</i>. Then press <i>ENTER</i> to confirm <i>file name: authorized_keys</i>.
 
-<p>
-  Now we should be able to log in as a new user. First disconnect from the server:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
-  /home/finesaucesadmin/.ssh# exit<br><br>
-  And log in as a new user:<br><br>
-  <strong><i>terminal</i></strong><br>
-  ~$ ssh finesaucesadmin@104.131.185.203<br><br>
+  Now we should be able to log in as a new user. First disconnect from the server:
+  
+  ***Ubuntu 20.04.5 LTS terminal***
+  ```
+  /home/finesaucesadmin/.ssh# exit
+  ```
+  
+  And log in as a new user:
+  ***terminal***
+  ```
+  ~$ ssh finesaucesadmin@104.131.185.203
+  ```
+  
   After successfully logging in as a new user, we need to disable root login. Use the following
-  command to open the SSHD config file:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
-  ~$ sudo nano /etc/ssh/sshd_config<br><br>
-</p>
+  command to open the SSHD config file:
+  
+  ***Ubuntu 20.04.5 LTS terminal***
+  ```
+  ~$ sudo nano /etc/ssh/sshd_config
+  ```
 
-<p>
   Find the <i>PermitRootLogin</i> and <i>PasswordAuthentication</i> attributes and set them to <i>no</i>.
-  Save the file, and let’s reload the SSHD service for changes to take effect:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  Save the file, and let’s reload the SSHD service for changes to take effect:
+  
+  ***``Ubuntu 20.04.5 LTS terminal``***
+  ```
   ~$ sudo systemctl reload sshd<br><br>
+  ```
+  
   Ubuntu 20.04 servers can use the UFW firewall to make sure only connections to certain
   services are allowed. We can set up a basic firewall very easily using this application.
   Applications can register their profiles with UFW upon installation. These profiles allow
   UFW to manage these applications by name. OpenSSH, the service allowing us to connect
   to our server now, has a profile registered with UFW. We can verify this by using the
-  following command:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
-  ~$ sudo ufw app list<br><br>
-  You should see similar output:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  following command:
+  
+  ***``Ubuntu 20.04.5 LTS terminal``***
+  ```
+  ~$ sudo ufw app list
+  ```
+  
+  You should see similar output:
+  
+  ***Ubuntu 20.04.5 LTS terminal***
+  ```
   Available applications:
-   OpenSSH<br><br>
+    OpenSSH
+  ```
+  
   We need to make sure that the firewall allows SSH connections so that we can log back in
-  next time:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
-  ~$ sudo ufw allow OpenSSH<br><br>
-  You should see the following message:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
-  Rules updated<br>
-  Rules updated (v6)<br><br>
-  Now we need to enable firewall:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
-  ~$ sudo ufw enable<br><br>
-  When asked about proceeding further, select y:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
-  Command may disrupt existing ssh connections. Proceed with operation (y|n)? y<br>
-  Firewall is active and enabled on system startup<br><br>
-  Let’s check the status of our firewall to confirm everything is working:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
-  ~$ sudo ufw status<br><br>
-  The following confirmation should appear in your terminal:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
-  Status: active<br>
-  To Action From<br>
-  -- ------ ----<br>
-  OpenSSH ALLOW Anywhere<br>
-  OpenSSH (v6) ALLOW Anywhere (v6)<br><br>
+  next time:
+  
+  ***``Ubuntu 20.04.5 LTS terminal``***
+  ```
+  ~$ sudo ufw allow OpenSSH
+  ```
+  
+  You should see the following message:
+  
+  ***``Ubuntu 20.04.5 LTS terminal``***
+  ```
+  Rules updated
+  Rules updated (v6)
+  ```
+  
+  Now we need to enable firewall:
+  
+  ***``Ubuntu 20.04.5 LTS terminal``***
+  ```
+  ~$ sudo ufw enable
+  ```
+  When asked about proceeding further, select y:
+  
+  ***``Ubuntu 20.04.5 LTS terminal``***
+  ```
+  Command may disrupt existing ssh connections. Proceed with operation (y|n)? y
+  Firewall is active and enabled on system startup
+  ```
+  
+  Let’s check the status of our firewall to confirm everything is working:
+  
+  ***``Ubuntu 20.04.5 LTS terminal``***
+  ```
+  ~$ sudo ufw status
+  ```
+  
+  The following confirmation should appear in your terminal:
+  
+  ***``Ubuntu 20.04.5 LTS terminal``***
+  ```
+  Status: active
+  To Action From
+  -- ------ ----
+  OpenSSH ALLOW Anywhere
+  OpenSSH (v6) ALLOW Anywhere (v6)
+  ```
+  
   As the firewall is currently blocking all connections except for SSH, if you install and
   configure additional services, you will need to adjust the firewall settings to allow traffic in.
-</p>
 
 ## 2 Installing software
 
