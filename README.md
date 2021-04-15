@@ -590,54 +590,82 @@
 
 ## 4 Gunicorn setup
 
-<p>
-  Let’s install Gunicorn by using the <i>pip</i> package manager:<br><br>
+  Let’s install Gunicorn by using the <i>pip</i> package manager:
+  
   ***``Ubuntu 20.04.5 LTS terminal``***
-  (env)~/django_projects/finesauces$ pip install gunicorn<br><br>
-  After a successful installation, we can deactivate the virtual environment:<br><br>
+  ```
+  (env)~/django_projects/finesauces$ pip install gunicorn
+  ```
+  
+  After a successful installation, we can deactivate the virtual environment:
+  
   ***``Ubuntu 20.04.5 LTS terminal``***
-  (env)~/django_projects/finesauces$ deactivate<br><br>
+  ```
+  (env)~/django_projects/finesauces$ deactivate
+  ```
+  
   To implement a way to start and stop our application server, we will create <i>system service</i>
   and <i>socket</i> files. The Gunicorn socket will be created at boot and will listen for connections.
   When a connection occurs, the system will automatically start the Gunicorn process to
   handle the connection.
-  Open systemd socket file for Gunicorn called <i>gunicorn.socket</i>:<br><br>
+  Open systemd socket file for Gunicorn called <i>gunicorn.socket</i>:
+  
   ***``Ubuntu 20.04.5 LTS terminal``***
-  ~/django_projects/finesauces$ sudo nano /etc/systemd/system/gunicorn.socket<br><br>
+  ```
+  ~/django_projects/finesauces$ sudo nano /etc/systemd/system/gunicorn.socket
+  ```
+  
   Inside, we will create a <i>[Unit]</i> section to describe the socket, a <i>[Socket]</i> section to define
   the socket location, and an <i>[Install]</i> section to make sure the socket is created at the right
-  time. Paste in the following code and save the file once done:<br><br>
+  time. Paste in the following code and save the file once done:
+  
   ***``/etc/systemd/system/gunicorn.socket``***
-  [Unit]<br>
-  Description=gunicorn socket<br><br>
-  [Socket]<br>
-  ListenStream=/run/gunicorn.sock<br><br>
-  [Install]<br>
-  WantedBy=sockets.target<br><br>
-  Now create and open gunicorn.service file:<br><br>
+  ```
+  [Unit]
+  Description=gunicorn socket
+  
+  [Socket]
+  ListenStream=/run/gunicorn.sock
+  
+  [Install]
+  WantedBy=sockets.target
+  ```
+  
+  Now create and open gunicorn.service file:
+  
   ***``Ubuntu 20.04.5 LTS terminal``***
-  ~/django_projects/finesauces$ sudo nano /etc/systemd/system/gunicorn.service<br><br>
-  Copy this code, paste it in and save the file:<br><br>
+  ```
+  ~/django_projects/finesauces$ sudo nano /etc/systemd/system/gunicorn.service
+  ```
+  
+  Copy this code, paste it in and save the file:
+  
   ***``/etc/systemd/system/gunicorn.service``***
-  [Unit]<br>
-  Description=gunicorn daemon<br>
-  Requires=gunicorn.socket<br>
-  After=network.target<br><br>
-  [Service]<br>
-  User=finesaucesadmin<br>
-  Group=www-data<br>
-  WorkingDirectory=/home/finesaucesadmin/django_projects/finesauces<br>
-  ExecStart=/home/finesaucesadmin/django_projects/finesauces/env/bin/gunicorn \<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--access-logfile - \<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--workers 3 \<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--bind unix:/run/gunicorn.sock \<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;finesauces_project.wsgi:application<br><br>
-  [Install]<br>
-  WantedBy=multi-user.target<br><br>
+  ```
+  [Unit]
+  Description=gunicorn daemon
+  Requires=gunicorn.socket
+  After=network.target
+  
+  [Service]
+  User=finesaucesadmin
+  Group=www-data
+  WorkingDirectory=/home/finesaucesadmin/django_projects/finesauces
+  ExecStart=/home/finesaucesadmin/django_projects/finesauces/env/bin/gunicorn \
+            --access-logfile - \
+            --workers 3 \
+            --bind unix:/run/gunicorn.sock \
+            finesauces_project.wsgi:application
+
+  [Install]
+  WantedBy=multi-user.target
+  ```
+  
   The <i>[Unit]</i> section is used to specify metadata and dependencies. It contains a description
   of our service and tells the <i>init</i> system to start this after the networking target has been
   reached. Because our service relies on the socket from the socket file, we need to include a
-  <i>Requires</i> directive to indicate that relationship:<br><br>
+  <i>Requires</i> directive to indicate that relationship:
+  
   In the <i>[Service]</i> part, we specify the user and group that we want the process to run under.
   We give our <i>finesaucesadmin</i> ownership of the process since it owns all of the relevant
   files. We’ll give group ownership to the <i>www-data</i> group so that Nginx can communicate
@@ -647,59 +675,83 @@
   the Unix socket we created within the /run directory so that the process can communicate
   with Nginx. We log all data to standard output so that the journald process can collect the
   Gunicorn logs. We can also specify any optional Gunicorn tweaks here. For example, we
-  specified 3 worker processes in this case.<br><br>
+  specified 3 worker processes in this case.
+  
   <i>[Install]</i> section will tell system what to link this service to if we enable it to start at boot.<br><br>
-  We can now start and enable Gunicorn socket:<br><br>
+  We can now start and enable Gunicorn socket:
+  
   ***``Ubuntu 20.04.5 LTS terminal``***
-  ~/django_projects/finesauces$ sudo systemctl start gunicorn.socket<br>
-  ~/django_projects/finesauces$ sudo systemctl enable gunicorn.socket<br><br>
-  After running the <i>enable</i> command, you should see the similar output:<br><br>
+  ```
+  ~/django_projects/finesauces$ sudo systemctl start gunicorn.socket
+  ~/django_projects/finesauces$ sudo systemctl enable gunicorn.socket
+  ```
+  
+  After running the <i>enable</i> command, you should see the similar output:
+  
   ***``Ubuntu 20.04.5 LTS terminal``***
-  Created symlink /etc/systemd/system/sockets.target.wants/gunicorn.socket →<br>
-  /etc/systemd/system/gunicorn.socket.<br><br>
-  Check the status of gunicorn to confirm whether it was able to start:<br><br>
+  ```
+  Created symlink /etc/systemd/system/sockets.target.wants/gunicorn.socket → /etc/systemd/system/gunicorn.socket.
+  ```
+  
+  Check the status of gunicorn to confirm whether it was able to start:
+  
   ***``Ubuntu 20.04.5 LTS terminal``***
-  ~/django_projects/finesauces$ sudo systemctl status gunicorn.socket<br><br>
-  If everything was set up properly, you should see similar output:<br><br>
+  ```
+  ~/django_projects/finesauces$ sudo systemctl status gunicorn.socket
+  ```
+  
+  If everything was set up properly, you should see similar output:
+  
   ***``Ubuntu 20.04.5 LTS terminal``***
-  ● gunicorn.socket - gunicorn socket<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Loaded: loaded (/etc/systemd/system/gunicorn.socket; enabled; vendor preset: enabled)<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Active: active (listening) since Sun 2021-01-03 20:11:09 UTC; 22s ago<br>
-  &nbsp;&nbsp;&nbsp;Triggers: ● gunicorn.service<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Listen: /run/gunicorn.sock (Stream)<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tasks: 0 (limit: 1137)<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Memory: 0B<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CGroup: /system.slice/gunicorn.socket<br>
-  <br>
-  Jan 03 20:11:09 ubuntu-s-1vcpu-1gb-nyc3-01 systemd[1]: Listening on gunicorn socket.<br><br>
-</p>
+  ```
+  ● gunicorn.socket - gunicorn socket
+       Loaded: loaded (/etc/systemd/system/gunicorn.socket; enabled; vendor preset: enabled)
+       Active: active (listening) since Sun 2021-01-03 20:11:09 UTC; 22s ago
+     Triggers: ● gunicorn.service
+       Listen: /run/gunicorn.sock (Stream)
+        Tasks: 0 (limit: 1137)
+       Memory: 0B
+       CGroup: /system.slice/gunicorn.socket
+  
+  Jan 03 20:11:09 ubuntu-s-1vcpu-1gb-nyc3-01 systemd[1]: Listening on gunicorn socket.
+  ```
 
 ## 5 NGINX setup
 
-<p>
   Now that Gunicorn is set up, we need to configure Nginx to pass traffic to the process.
   We will start by creating and opening a new server block in Nginx’s <i>sites-available</i>
-  directory:<br><br>
+  directory:
+  
   ***``Ubuntu 20.04.5 LTS terminal``***
-  ~/django_projects/finesauces$ sudo nano /etc/nginx/sites-available/finesauces<br><br>
+  ```
+  ~/django_projects/finesauces$ sudo nano /etc/nginx/sites-available/finesauces
+  ```
+  
   Paste in the following code. Make sure you provide your Droplet IP address in the 
-  <i>server_name</i> attribute:<br><br>
+  <i>server_name</i> attribute:
+  
   ***``/etc/nginx/sites-available/finesauces``***
-  server {<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;listen 80;<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;server_name 104.131.185.203;<br><br>
-  &nbsp;&nbsp;&nbsp;&nbsp;location = /favicon.ico { access_log off; log_not_found off; }<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;location /static/ {<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;root /home/finesaucesadmin/django_projects/finesauces;<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;}<br><br>
-  &nbsp;&nbsp;&nbsp;&nbsp;location /media/ {<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;root /home/finesaucesadmin/django_projects/finesauces;<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;}<br><br>
-  &nbsp;&nbsp;&nbsp;&nbsp;location / {<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;include proxy_params;<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;proxy_pass http://unix:/run/gunicorn.sock;<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;}<br>
-  }<br><br>
+  ```
+  server {
+      listen 80;
+      server_name 104.131.185.203;
+
+      location = /favicon.ico { access_log off; log_not_found off; }
+      location /static/ {
+          root /home/finesaucesadmin/django_projects/finesauces;
+      }
+
+      location /media/ {
+          root /home/finesaucesadmin/django_projects/finesauces;
+      }
+
+      location / {
+          include proxy_params;
+          proxy_pass http://unix:/run/gunicorn.sock;
+      }
+  }
+  ```
+  
   We specify that this block should listen on port 80, and it should respond to our Droplet’s
   IP address. Next, we will tell Nginx to ignore any problems with finding a favicon. We will
   also tell it where to find the static assets that we collected in our <i>~/finesauces/static</i>
@@ -707,110 +759,186 @@
   location block to match those requests. Finally, we’ll create a <i>location / {}</i> block to match
   all other requests. Inside of this location, we’ll include the standard <i>proxy_params</i> file
   included with the Nginx installation, and then we will pass the traffic directly to the
-  Gunicorn socket.<br>
-  Enable this file by linking it to the <i>sites-enabled</i> dir:<br><br>
+  Gunicorn socket.
+  
+  Enable this file by linking it to the <i>sites-enabled</i> dir:
+  
   ***``Ubuntu 20.04.5 LTS terminal``***
-  ~/django_projects/finesauces$ sudo ln -s /etc/nginx/sites-available/finesauces
-  /etc/nginx/sites-enabled<br><br>
-  Test NGINX config:<br><br>
+  ```
+  ~/django_projects/finesauces$ sudo ln -s /etc/nginx/sites-available/finesauces /etc/nginx/sites-enabled
+  ```
+  
+  Test NGINX config:
+  
   ***``Ubuntu 20.04.5 LTS terminal``***
-  ~/django_projects/finesauces$ sudo nginx -t<br><br>
-  You should see the following output:<br><br>
+  ```
+  ~/django_projects/finesauces$ sudo nginx -t
+  ```
+  
+  You should see the following output:
+  
   ***``Ubuntu 20.04.5 LTS terminal``***
-  nginx: the configuration file /etc/nginx/nginx.conf syntax is ok<br>
-  nginx: configuration file /etc/nginx/nginx.conf test is successful<br><br>
-  Restart NGINX:<br><br>
+  ```
+  nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+  nginx: configuration file /etc/nginx/nginx.conf test is successful
+  ```
+  
+  Restart NGINX:
   ***``Ubuntu 20.04.5 LTS terminal``***
-  ~/django_projects/finesauces$ sudo systemctl restart nginx<br><br>
-  Open up our firewall to allow normal traffic on port 80:<br><br>
+  ```
+  ~/django_projects/finesauces$ sudo systemctl restart nginx
+  ```
+  
+  Open up our firewall to allow normal traffic on port 80:
+  
   ***``Ubuntu 20.04.5 LTS terminal``***
-  ~/django_projects/finesauces$ sudo ufw allow 'Nginx Full'<br><br>
-  This should be the terminal output:<br><br>
+  ```
+  ~/django_projects/finesauces$ sudo ufw allow 'Nginx Full'
+  ```
+  
+  This should be the terminal output:
   ***``Ubuntu 20.04.5 LTS terminal``***
-  Rule added<br>
-  Rule added (v6)<br><br>
-  Now we can start rabbitmq-server and Celery:<br><br>
+  ```
+  Rule added
+  Rule added (v6)
+  ```
+  
+  Now we can start rabbitmq-server and Celery:
+  
   ***``Ubuntu 20.04.5 LTS terminal``***
-  ~/django_projects/finesauces$ sudo rabbitmq-server<br><br>
-  You will probably receive notification that <i>rabbitmq-server</i> is already running:<br><br>
+  ```
+  ~/django_projects/finesauces$ sudo rabbitmq-server
+  ```
+  
+  You will probably receive notification that <i>rabbitmq-server</i> is already running:
+  
   ***``Ubuntu 20.04.5 LTS terminal``***
-  ERROR: node with name "rabbit" already running on "ubuntu-s-1vcpu-1gb-nyc3-01"<br><br>
+  ```
+  ERROR: node with name "rabbit" already running on "ubuntu-s-1vcpu-1gb-nyc3-01"
+  ```
+  
   To start Celery task manager, make sure your virtual environment is active, and you are
-  within your main project directory folder:<br><br>
+  within your main project directory folder:
+  
   ***``Ubuntu 20.04.5 LTS terminal``***
-  (env)~/django_projects/finesauces$ celery -A finesauces_project worker -l info<br><br>
+  ```
+  (env)~/django_projects/finesauces$ celery -A finesauces_project worker -l info
+  ```
+  
   Our e-commerce project is now successfully deployed. Let’s try to access our site by using 
-  Droplet IP address http://104.131.185.203/.
-</p>
+  Droplet IP address [http://104.131.185.203/](http://104.131.185.203/).
+
 
 ## 6 Domain setup
 
-<p>
   To obtain a custom domain, we will need to use the service of a domain registrar. There
-  are many options to choose from. One of them would be <a href="https://www.namecheap.com/">Namecheap</a>. You can use
-  whichever registrar you like. All of their interfaces will look almost identical.<br><br>
+  are many options to choose from. One of them would be [Namecheap](https://www.namecheap.com/). You can use
+  whichever registrar you like. All of their interfaces will look almost identical.
+  
   Once you choose your domain registrar, log in to your account, and purchase a custom
   domain that you like. Inside the domain dashboard, look for <i>DNS</i> settings. There, we will
   need to create <i>A</i> and <i>CNAME</i> records: We will start with A record. For <i>Host</i> value, use @
-  symbol, and for <i>IP</i> address, use your Droplet’s IP address.<br></br>
+  symbol, and for <i>IP</i> address, use your Droplet’s IP address.
+  
   As for <i>CNAME</i>, set <i>Host</i> value to <i>www</i>. As a target value, provide your actual domain
-  value. In my case, that would be <i>finesauces.store</i>.<br><br>
+  value. In my case, that would be <i>finesauces.store</i>.
+  
   Now we need to return to <i>local_settings.py</i> and update </i>ALLOWED_HOSTS to include our
-  domain:<br><br>
+  domain:
+  
   ***``Ubuntu 20.04.5 LTS terminal``***
-  ~/django_projects/finesauces/finesauces_project$ sudo nano local_settings.py<br><br>
-  Add the domain in the following way:<br><br>
-  ALLOWED_HOSTS = ['104.131.185.203', <strong>'finesauces.store', 'www.finesauces.store'</strong>]<br><br>
-  We also need to update <i>/etc/nginx/sites-available/finesauces</i> file to include our domain:<br><br>
+  ```
+  ~/django_projects/finesauces/finesauces_project$ sudo nano local_settings.py
+  ```
+   
+  Add the domain in the following way:
+  ```
+  ALLOWED_HOSTS = ['104.131.185.203', <strong>'finesauces.store', 'www.finesauces.store']
+  ```
+   
+  We also need to update <i>/etc/nginx/sites-available/finesauces</i> file to include our domain:
+  
   ***``Ubuntu 20.04.5 LTS terminal``***
-  ~/django_projects/finesauces$ sudo nano /etc/nginx/sites-available/finesauces<br><br>
-  Add our domain like this next to our Droplet’s IP address:<br><br>
+  ```
+  ~/django_projects/finesauces$ sudo nano /etc/nginx/sites-available/finesauces
+  ```
+  
+  Add our domain like this next to our Droplet’s IP address:
+  
   ***``/etc/nginx/sites-available/finesauces``***
-  server_name 104.131.185.203 <strong>finesauces.store www.finesauces.store;</strong><br><br>
-  Reload NGINX & Gunicorn for updates to take effect:<br><br>
+  ```
+  server_name 104.131.185.203 <strong>finesauces.store www.finesauces.store;
+  ```
+  
+  Reload NGINX & Gunicorn for updates to take effect:
+  
   ***``Ubuntu 20.04.5 LTS terminal``***
+  ```
   ~/django_projects/finesauces$ sudo systemctl restart nginx<br>
-  ~/django_projects/finesauces$ sudo systemctl restart gunicorn<br><br>
-  Our e-commerce site is now available at <a href="http://finesauces.store/">http://finesauces.store/</a>.
-</p>
+  ~/django_projects/finesauces$ sudo systemctl restart gunicorn
+  ```
+  
+  Our e-commerce site is now available at [http://finesauces.store/](http://finesauces.store/).
 
 ## 7 Setting up SSL certificate
 
-<p>
   The core function of an SSL certificate is to protect server-client communication. Upon
   installing SSL, every bit of information is encrypted and turned into the undecipherable 
   format. Valid SSL certification helps tremendously to establish a trustworthy experience 
   for visitors, which is especially important for websites accepting payments. Popular search 
-  engines also seem to favor secured sites enabling HTTPS connection.<br><br>
+  engines also seem to favor secured sites enabling HTTPS connection.
+  
   To set up an SSL certificate and enable HTTPS, we will now install a certification tool
-  called <a href="https://certbot.eff.org/">Certbot</a>, which is a free and open-source tool for using <a href="https://letsencrypt.org/">Let’s Encrypt</a> certificates 
-  on manually-administered websites. Use the following command for installation:<br><br>
+  called [Certbot](https://certbot.eff.org/), which is a free and open-source tool for using [Let’s Encrypt](https://letsencrypt.org/) certificates 
+  on manually-administered websites. Use the following command for installation:
+  
   ***``Ubuntu 20.04.5 LTS terminal``***
-  ~$ sudo snap install --classic certbot<br><br>
-  After successful installation, you should see the following output:<br><br>
+  ```
+  ~$ sudo snap install --classic certbot
+  ```
+  
+  After successful installation, you should see the following output:
+  
   ***``Ubuntu 20.04.5 LTS terminal``***
-  certbot 1.9.0 from Certbot Project (certbot-eff✓) installed<br><br>
+  ```
+  certbot 1.9.0 from Certbot Project (certbot-eff✓) installed
+  ```
+  
   Let’s run the following command to obtain a certificate and have Certbot edit our Nginx 
-  configuration automatically to serve it, turning on HTTPS access in a single step:<br><br>
+  configuration automatically to serve it, turning on HTTPS access in a single step:
+  
   ***``Ubuntu 20.04.5 LTS terminal``***
-  ~$ sudo certbot --nginx<br><br>
+  ```
+  ~$ sudo certbot --nginx
+  ```
+  
   Go through the terminal prompts. When asked about domain names for which you would
-  like to activate HTTPS:<br><br>
+  like to activate HTTPS:
+  
   ***``Ubuntu 20.04.5 LTS terminal``***
-  Which names would you like to activate HTTPS for?<br>
-  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -<br>
-  1: finesauces.store<br>
-  2: www.finesauces.store<br>
-  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -<br>
+  ```
+  Which names would you like to activate HTTPS for?
+  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  1: finesauces.store
+  2: www.finesauces.store
+  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   Select the appropriate numbers separated by commas and/or spaces, or leave input
-  blank to select all options shown (Enter 'c' to cancel):<br><br>
+  blank to select all options shown (Enter 'c' to cancel):
+  ```
+  
   leave the input blank and press Enter to select all of the options. As a final step, test
-  automatic certificate renewal by using the following command:<br><br>
+  automatic certificate renewal by using the following command:
+  
   ***``Ubuntu 20.04.5 LTS terminal``***
-  ~$ sudo certbot renew --dry-run<br><br>
+  ```
+  ~$ sudo certbot renew --dry-run
+  ```
+  
   Certificates will be renewed automatically before they expire. We will not need to run 
-  Certbot again, unless we change the configuration.<br><br>
-  Our e-commerce site is now available at <a href="https://finesauces.store/">https://finesauces.store/</a>. HTTPS certificates are
-  in place, and a lock icon is displayed in the URL bar.<br><br>
+  Certbot again, unless we change the configuration.
+  
+  Our e-commerce site is now available at [https://finesauces.store/](https://finesauces.store/). HTTPS certificates are
+  in place, and a lock icon is displayed in the URL bar.
+  
   The project is now complete and successfully deployed! 🥳
-</p>
+
