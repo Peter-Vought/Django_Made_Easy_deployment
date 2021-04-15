@@ -168,5 +168,29 @@
   Paste it to <i>authorized_keys</i> file opened in a terminal window.<br>
   Press <i>CONTROL-X</i> to save the file. Confirm changes by pressing <i>Y</i>. Then press <i>ENTER</i> to
   confirm <i>file name: authorized_keys</i>.
+</p>
+<p>
+  Now we should be able to log in as a new user. First disconnect from the server:<br><br>
+  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  /home/finesaucesadmin/.ssh# exit<br><br>
+  And log in as a new user:<br><br>
+  <strong><i>terminal</i></strong><br>
+  ~$ ssh finesaucesadmin@104.131.185.203<br><br>
+  After successfully logging in as a new user, we need to disable root login. Use the following
+  command to open the SSHD config file:<br><br>
+  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  ~$ sudo nano /etc/ssh/sshd_config<br><br>
+</p>
+<p>
+  Find the <i>PermitRootLogin</i> and <i>PasswordAuthentication</i> attributes and set them to <i>no</i>.
+  Save the file, and let’s reload the SSHD service for changes to take effect:<br><br>
+  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  ~$ sudo systemctl reload sshd<br><br>
+  Ubuntu 20.04 servers can use the UFW firewall to make sure only connections to certain
+  services are allowed. We can set up a basic firewall very easily using this application.
+  Applications can register their profiles with UFW upon installation. These profiles allow
+  UFW to manage these applications by name. OpenSSH, the service allowing us to connect
+  to our server now, has a profile registered with UFW. We can verify this by using the
+  following command:<br><br>
 
 </p>
