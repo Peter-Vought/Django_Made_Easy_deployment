@@ -13,8 +13,11 @@
 * [3.1 Settings and migrations](#31-settings-and-migrations)
 
 [4 Gunicorn setup](#4-gunicorn-setup)
+
 [5 NGINX setup](#5-nginx-setup)
+
 [6 Domain setup](#6-domain-setup)
+
 [7 Setting up SSL certificate](#7-setting-up-ssl-certificate)
 <hr>
 
