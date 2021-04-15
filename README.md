@@ -17,21 +17,19 @@
 
   The deployment process might get tricky, and opportunities for error are easy to find. The
   following text serves as a step-by-step deployment guide and is based on
-  <a href="https://www.digitalocean.com/">DigitalOcean</a> documents 
-  <a href="https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-20-04">Initial Server Setup with Ubuntu 20.04</a> and
-  <a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-20-04">How To Set Up
-  Django with Postgres, Nginx, and Gunicorn on Ubuntu 20.04</a>.
+  [DigitalOcean](https://www.digitalocean.com/) documents 
+  [Initial Server Setup with Ubuntu 20.04](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-20-04) and [How To Set Up Django with Postgres, Nginx, and Gunicorn on Ubuntu 20.04](https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-20-04).
 
   We will start by setting up our Virtual Private Server along with the PostgreSQL database
-  and virtual environment. We will configure the <a href="https://gunicorn.org/">Gunicorn</a> application server to interface
-  with our applications and set up <a href="https://www.nginx.com/">Nginx</a> to reverse proxy to Gunicorn, giving us access to
+  and virtual environment. We will configure the [Gunicorn](https://gunicorn.org/) application server to interface
+  with our applications and set up [Nginx](https://www.nginx.com/) to reverse proxy to Gunicorn, giving us access to
   its security and performance features to serve our apps. As a final step, we will go through
   custom domain setup and adding an SSL certificate to our website.
 
 ## 1 VPS access and security
 
   We will use the DigitalOcean cloud hosting provider to house our project. If you haven’t
-  created your account yet, you can use this <a href="https://m.do.co/c/36d391016ef7">link</a> to register and get free $100 credit to start.
+  created your account yet, you can use this [link](https://m.do.co/c/36d391016ef7") to register and get free $100 credit to start.
 
 ### 1.1 Creating Droplet
 
@@ -156,18 +154,16 @@
 
 ### 1.4 Creating new user and updating security settings
 
-<p>
   We don’t want to use the root user for handling our project on the server for security
   reasons. The root user is the administrative user in a Linux environment that has very
   broad privileges. Because of the heightened privileges of the root account, we are
   discouraged from using it regularly. This is because part of the power inherent with the
   root account is the ability to make very destructive changes, even by accident.
-</p>
 
-<p>
   Let’s go ahead and create a new user account now. Feel free to use any name you like. I
-  will go with <i>finesaucesadmin</i>. Use the following command to create the user:<br><br>
-  <strong><i>terminal</i></strong><br>
+  will go with *finesaucesadmin*. Use the following command to create the user:
+  
+  ***terminal***
   # adduser finesaucesadmin<br><br>
   Follow instructions in the terminal. Make sure you provide some secure password. You
   can go with the default, blank values for contact information fields:<br><br>
