@@ -860,7 +860,7 @@
    
   Add the domain in the following way:
   ```
-  ALLOWED_HOSTS = ['104.131.185.203', <strong>'finesauces.store', 'www.finesauces.store']
+  ALLOWED_HOSTS = ['104.131.185.203', 'finesauces.store', 'www.finesauces.store']
   ```
    
   We also need to update */etc/nginx/sites-available/finesauces* file to include our domain:
