@@ -109,8 +109,8 @@
   
   <strong><i>``Ubuntu 20.04.5 LTS terminal``</i></strong><br>
   ``Welcome to Ubuntu 20.04.1 LTS (GNU/Linux 5.4.0-51-generic x86_64)``<br><br>
-  `` * Documentation: https://help.ubuntu.com``<br>
-  `` * Management: https://landscape.canonical.com``<br>
+  ``  * Documentation: https://help.ubuntu.com``<br>
+  ``  * Management: https://landscape.canonical.com``<br>
   &nbsp;* Support: https://ubuntu.com/advantage<br><br>
   &nbsp;&nbsp; System information as of Sun Jan 3 19:15:11 UTC 2021<br><br>
   &nbsp;&nbsp; System load: 0.0 Users logged in: 0<br>
