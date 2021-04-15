@@ -82,7 +82,7 @@
 ### 1.3 Logging into Droplet
 
   Let’s try connecting to our Droplet. Open terminal and type the following command
-  (replace <i>104.131.185.203</i> with your IP address):
+  (replace *104.131.185.203* with your IP address):
   
   ***``terminal``***
   ```
@@ -216,7 +216,7 @@
   /home/finesaucesadmin# mkdir .ssh
   ```
   
-  Move into this directory by using the <i>cd</i> command:
+  Move into this directory by using the *cd* command:
   
   ***``Ubuntu 20.04.5 LTS terminal``***
   ```
@@ -232,15 +232,15 @@
   
   Your terminal windows will turn into a simple text editor.Here we need to paste our SSH key. We can either generate a new one or use one we
   already have on our local machine. Let’s use that one. Open a new terminal window and
-  use the following command to copy the contents of the <i>id_rsa_do.pub</i> file:
+  use the following command to copy the contents of the *id_rsa_do.pub* file:
   
   ***``terminal``***
   ```
   ~$ cat ~/.ssh/id_rsa_do.pub
   ```
   
-  Paste it to <i>authorized_keys</i> file opened in a terminal window.
-  Press <i>CONTROL-X</i> to save the file. Confirm changes by pressing <i>Y</i>. Then press <i>ENTER</i> to confirm <i>file name: authorized_keys</i>.
+  Paste it to *authorized_keys* file opened in a terminal window.
+  Press *CONTROL-X* to save the file. Confirm changes by pressing *Y*. Then press *ENTER* to confirm *file name: authorized_keys*.
 
   Now we should be able to log in as a new user. First disconnect from the server:
   
@@ -264,7 +264,7 @@
   ~$ sudo nano /etc/ssh/sshd_config
   ```
 
-  Find the <i>PermitRootLogin</i> and <i>PasswordAuthentication</i> attributes and set them to <i>no</i>.
+  Find the *PermitRootLogin* and *PasswordAuthentication* attributes and set them to *no*.
   Save the file, and let’s reload the SSHD service for changes to take effect:
   
   ***``Ubuntu 20.04.5 LTS terminal``***
@@ -429,7 +429,7 @@
   postgres=# ALTER ROLE finesaucesadmin SET timezone TO 'UTC';
   ```
   
-  Grant <i>finesaucesadmin</i> user access to administer our database:
+  Grant *finesaucesadmin* user access to administer our database:
   
   ***``postgres terminal``***
   ```
@@ -446,7 +446,7 @@
 ## 3 Virtual environment
 
   Before cloning up our project from the remote repository, we need to set up our virtual
-  environment. To do so, we first have to install the python3 <i>venv</i> package. Install the
+  environment. To do so, we first have to install the python3 *venv* package. Install the
   package by typing:
   
   ***``Ubuntu 20.04.5 LTS terminal``***
@@ -454,8 +454,8 @@
   ~$ sudo apt-get install python3-venv
   ```
   
-  After installing the <i>venv</i> package, we can proceed by creating and moving into our
-  <i>django_projects</i> project directory, where our current and future projects will reside:
+  After installing the *venv* package, we can proceed by creating and moving into our
+  *django_projects* project directory, where our current and future projects will reside:
   
   ***``Ubuntu 20.04.5 LTS terminal``***
   ```
@@ -471,7 +471,7 @@
   ~/django_projects$ git clone https://peter-vought@bitbucket.org/petervought/finesauces.git
   ```
   
-  Once our project is copied into the <i>django_projects</i> directory, move inside that project:
+  Once our project is copied into the *django_projects* directory, move inside that project:
   
   ***``Ubuntu 20.04.5 LTS terminal``***
   ```
@@ -492,7 +492,7 @@
   ~/django_projects/finesauces$ source env/bin/activate
   ```
   
-  Now we can go ahead and install our Python dependencies listed in the <i>requirements.txt</i>
+  Now we can go ahead and install our Python dependencies listed in the *requirements.txt*
   file:
   
   ***``Ubuntu 20.04.5 LTS terminal``***
@@ -502,23 +502,23 @@
 
 ### 3.1 Settings and migrations
 
-  Let’s create a <i>local_settings.py</i> file to store project sensitive information. Move into
-  <i>finesauces_project</i> folder:
+  Let’s create a *local_settings.py* file to store project sensitive information. Move into
+  *finesauces_project* folder:
   
   ***``Ubuntu 20.04.5 LTS terminal``***
   ```
   (env)~/django_projects/finesauces$ cd finesauces_project/
   ```
   
-  Create <i>local_settings.py</i> file by using the following command:
+  Create *local_settings.py* file by using the following command:
   
   ***``Ubuntu 20.04.5 LTS terminal``***
   ```
   (env)~/django_projects/finesauces/finesauces_project$ sudo nano local_settings.py
   ```
   
-  Paste in the contents from your local machine <i>local_settings.py</i> file and update <i>DEBUG</i>
-  field to <i>False</i> and add your <i>Droplet</i> IP address to the <i>ALLOWED_HOSTS</i> list:
+  Paste in the contents from your local machine *local_settings.py* file and update *DEBUG*
+  field to *False* and add your *Droplet* IP address to the *ALLOWED_HOSTS* list:
   
   ```
   #...
@@ -574,7 +574,7 @@
     Applying sessions.0001_initial... OK
   ```
   
-  Now let’s create our superuser with the <i>createsuperuser</i> command:
+  Now let’s create our superuser with the *createsuperuser* command:
   
   ***``Ubuntu 20.04.5 LTS terminal``***
   ```
@@ -590,7 +590,7 @@
 
 ## 4 Gunicorn setup
 
-  Let’s install Gunicorn by using the <i>pip</i> package manager:
+  Let’s install Gunicorn by using the *pip* package manager:
   
   ***``Ubuntu 20.04.5 LTS terminal``***
   ```
@@ -604,19 +604,19 @@
   (env)~/django_projects/finesauces$ deactivate
   ```
   
-  To implement a way to start and stop our application server, we will create <i>system service</i>
-  and <i>socket</i> files. The Gunicorn socket will be created at boot and will listen for connections.
+  To implement a way to start and stop our application server, we will create *system service*
+  and *socket* files. The Gunicorn socket will be created at boot and will listen for connections.
   When a connection occurs, the system will automatically start the Gunicorn process to
   handle the connection.
-  Open systemd socket file for Gunicorn called <i>gunicorn.socket</i>:
+  Open systemd socket file for Gunicorn called *gunicorn.socket*:
   
   ***``Ubuntu 20.04.5 LTS terminal``***
   ```
   ~/django_projects/finesauces$ sudo nano /etc/systemd/system/gunicorn.socket
   ```
   
-  Inside, we will create a <i>[Unit]</i> section to describe the socket, a <i>[Socket]</i> section to define
-  the socket location, and an <i>[Install]</i> section to make sure the socket is created at the right
+  Inside, we will create a *[Unit]* section to describe the socket, a *[Socket]* section to define
+  the socket location, and an *[Install]* section to make sure the socket is created at the right
   time. Paste in the following code and save the file once done:
   
   ***``/etc/systemd/system/gunicorn.socket``***
@@ -661,14 +661,14 @@
   WantedBy=multi-user.target
   ```
   
-  The <i>[Unit]</i> section is used to specify metadata and dependencies. It contains a description
-  of our service and tells the <i>init</i> system to start this after the networking target has been
+  The *[Unit]* section is used to specify metadata and dependencies. It contains a description
+  of our service and tells the *init* system to start this after the networking target has been
   reached. Because our service relies on the socket from the socket file, we need to include a
-  <i>Requires</i> directive to indicate that relationship:
+  *Requires* directive to indicate that relationship:
   
-  In the <i>[Service]</i> part, we specify the user and group that we want the process to run under.
-  We give our <i>finesaucesadmin</i> ownership of the process since it owns all of the relevant
-  files. We’ll give group ownership to the <i>www-data</i> group so that Nginx can communicate
+  In the *[Service]* part, we specify the user and group that we want the process to run under.
+  We give our *finesaucesadmin* ownership of the process since it owns all of the relevant
+  files. We’ll give group ownership to the *www-data* group so that Nginx can communicate
   easily with Gunicorn. We’ll then map out the working directory and specify the command
   to use to start the service. In this case, we’ll have to specify the full path to the Gunicorn
   executable, which is installed within our virtual environment. We will bind the process to
@@ -677,7 +677,7 @@
   Gunicorn logs. We can also specify any optional Gunicorn tweaks here. For example, we
   specified 3 worker processes in this case.
   
-  <i>[Install]</i> section will tell system what to link this service to if we enable it to start at boot.<br><br>
+  *[Install]* section will tell system what to link this service to if we enable it to start at boot.<br><br>
   We can now start and enable Gunicorn socket:
   
   ***``Ubuntu 20.04.5 LTS terminal``***
@@ -686,7 +686,7 @@
   ~/django_projects/finesauces$ sudo systemctl enable gunicorn.socket
   ```
   
-  After running the <i>enable</i> command, you should see the similar output:
+  After running the *enable* command, you should see the similar output:
   
   ***``Ubuntu 20.04.5 LTS terminal``***
   ```
@@ -719,7 +719,7 @@
 ## 5 NGINX setup
 
   Now that Gunicorn is set up, we need to configure Nginx to pass traffic to the process.
-  We will start by creating and opening a new server block in Nginx’s <i>sites-available</i>
+  We will start by creating and opening a new server block in Nginx’s *sites-available*
   directory:
   
   ***``Ubuntu 20.04.5 LTS terminal``***
@@ -728,7 +728,7 @@
   ```
   
   Paste in the following code. Make sure you provide your Droplet IP address in the 
-  <i>server_name</i> attribute:
+  *server_name* attribute:
   
   ***``/etc/nginx/sites-available/finesauces``***
   ```
@@ -754,14 +754,14 @@
   
   We specify that this block should listen on port 80, and it should respond to our Droplet’s
   IP address. Next, we will tell Nginx to ignore any problems with finding a favicon. We will
-  also tell it where to find the static assets that we collected in our <i>~/finesauces/static</i>
+  also tell it where to find the static assets that we collected in our *~/finesauces/static*
   directory. All of these files have a standard URI prefix of “/static”, so we can create a
-  location block to match those requests. Finally, we’ll create a <i>location / {}</i> block to match
-  all other requests. Inside of this location, we’ll include the standard <i>proxy_params</i> file
+  location block to match those requests. Finally, we’ll create a *location / {}* block to match
+  all other requests. Inside of this location, we’ll include the standard *proxy_params* file
   included with the Nginx installation, and then we will pass the traffic directly to the
   Gunicorn socket.
   
-  Enable this file by linking it to the <i>sites-enabled</i> dir:
+  Enable this file by linking it to the *sites-enabled* dir:
   
   ***``Ubuntu 20.04.5 LTS terminal``***
   ```
@@ -811,7 +811,7 @@
   ~/django_projects/finesauces$ sudo rabbitmq-server
   ```
   
-  You will probably receive notification that <i>rabbitmq-server</i> is already running:
+  You will probably receive notification that *rabbitmq-server* is already running:
   
   ***``Ubuntu 20.04.5 LTS terminal``***
   ```
@@ -837,14 +837,14 @@
   whichever registrar you like. All of their interfaces will look almost identical.
   
   Once you choose your domain registrar, log in to your account, and purchase a custom
-  domain that you like. Inside the domain dashboard, look for <i>DNS</i> settings. There, we will
-  need to create <i>A</i> and <i>CNAME</i> records: We will start with A record. For <i>Host</i> value, use @
-  symbol, and for <i>IP</i> address, use your Droplet’s IP address.
+  domain that you like. Inside the domain dashboard, look for *DNS* settings. There, we will
+  need to create *A* and *CNAME* records: We will start with A record. For *Host* value, use @
+  symbol, and for *IP* address, use your Droplet’s IP address.
   
-  As for <i>CNAME</i>, set <i>Host</i> value to <i>www</i>. As a target value, provide your actual domain
-  value. In my case, that would be <i>finesauces.store</i>.
+  As for *CNAME*, set *Host* value to *www*. As a target value, provide your actual domain
+  value. In my case, that would be *finesauces.store*.
   
-  Now we need to return to <i>local_settings.py</i> and update </i>ALLOWED_HOSTS to include our
+  Now we need to return to *local_settings.py* and update *ALLOWED_HOSTS to include our
   domain:
   
   ***``Ubuntu 20.04.5 LTS terminal``***
@@ -857,7 +857,7 @@
   ALLOWED_HOSTS = ['104.131.185.203', <strong>'finesauces.store', 'www.finesauces.store']
   ```
    
-  We also need to update <i>/etc/nginx/sites-available/finesauces</i> file to include our domain:
+  We also need to update */etc/nginx/sites-available/finesauces* file to include our domain:
   
   ***``Ubuntu 20.04.5 LTS terminal``***
   ```
