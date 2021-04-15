@@ -35,41 +35,44 @@
 
 ### 1.1 Creating Droplet
 
-<p>
   Once registered and signed in, select Droplets from the dropdown menu. We are then redirected to the Droplet creation page. 
   Droplets are basically instances of various Linux distributions. 
   Select Ubuntu 20.04 (LTS) version and Basic plan. We will opt for a $5/month plan, which is more than enough for our needs. 
   We won’t be adding any additional storage, so ignore the Add block storage option. For
   the datacenter region, select the one closest to you. As for Authentication, we will be using SSH keys to set up and secure our connection to
   the server.
-<p>
 
 ### 1.2 Creating SSH key
-
 
   We don’t have any SSH keys available as of now. Let’s go ahead and create one. In case
   you are running Windows, the ssh key creation process might be slightly different to
   macOS/Linux. If unsure, follow this <a href="https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh">guide</a>. 
-  For macOS and Linux, open your terminal and type the following command:<br><br>
-  <strong><i>terminal</i></strong><br>
+  For macOS and Linux, open your terminal and type the following command:
+  
+  <strong><i>``terminal``</i></strong><br>
   ``~$ ssh-keygen``<br><br>
   By default, we will be offered to create id_rsa and id_rsa.pub files. I prefer to keep my ssh
-  keys separated, so I will specify a different name for these files:<br><br>
-  <strong><i>terminal</i></strong><br>
-  Generating public/private rsa key pair.
-  Enter file in which to save the key (/Users/peter/.ssh/id_rsa): <strong>.ssh/id_rsa_do</strong><br><br>
-  And following private and public ssh keys are generated for me:<br><br>
-  ~/.ssh/id_rsa_do
-  ~/.ssh/id_rsa_do.pub<br><br>
-  Let’s copy the contents of the id_rsa.pub key by using the following command:<br><br>
-  <strong><i>terminal</i></strong><br>
-  ~$ cat ~/.ssh/id_rsa_do.pub<br><br>
+  keys separated, so I will specify a different name for these files:
+  
+  <strong><i>``terminal``</i></strong><br>
+  ``Generating public/private rsa key pair.``<br>
+  ``Enter file in which to save the key (/Users/peter/.ssh/id_rsa): .ssh/id_rsa_do``
+  
+  And following private and public ssh keys are generated for me:
+  
+  ``~/.ssh/id_rsa_do
+  ~/.ssh/id_rsa_do.pub``
+  
+  Let’s copy the contents of the id_rsa.pub key by using the following command:
+  
+  <strong><i>``terminal``</i></strong><br>
+  ``~$ cat ~/.ssh/id_rsa_do.pub``
+  
   This command will reveal the content of our public ssh key file in the terminal. Return
   back to DigitalOcean, click on New SSH Key, and paste the content to the SSH key window.
   Provide some name for this key. Once done with these steps, click on Add SSH Key to add a new SSH key to our account.
   Let’s finish this setup by creating our Droplet by clicking on the Create Droplet button
   down below.
-
 
 ### 1.3 Logging into Droplet
 
