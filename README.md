@@ -462,104 +462,152 @@
   ~$ mkdir django_projects
   ~$ cd django_projects
   ```
+  
   When inside our new project directory, clone remote repository (replace the link with your
-  repository URL):<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
-  ~/django_projects$ git clone https://peter-vought@bitbucket.org/petervought/finesauces.git<br><br>
-  Once our project is copied into the <i>django_projects</i> directory, move inside that project:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
-  ~/django_projects$ cd finesauces/<br><br>
-  and create a virtual environment:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
-  ~/django_projects/finesauces$ python3 -m venv env<br><br>
-  Activate the environment:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
-  ~/django_projects/finesauces$ source env/bin/activate<br><br>
+  repository URL):
+  
+  ***``Ubuntu 20.04.5 LTS terminal``***
+  ```
+  ~/django_projects$ git clone https://peter-vought@bitbucket.org/petervought/finesauces.git
+  ```
+  
+  Once our project is copied into the <i>django_projects</i> directory, move inside that project:
+  
+  ***``Ubuntu 20.04.5 LTS terminal``***
+  ```
+  ~/django_projects$ cd finesauces/
+  ```
+  
+  and create a virtual environment:
+  
+  ***``Ubuntu 20.04.5 LTS terminal``***
+  ```
+  ~/django_projects/finesauces$ python3 -m venv env
+  ```
+  
+  Activate the environment:
+  
+  ***``Ubuntu 20.04.5 LTS terminal``***
+  ```
+  ~/django_projects/finesauces$ source env/bin/activate
+  ```
+  
   Now we can go ahead and install our Python dependencies listed in the <i>requirements.txt</i>
-  file:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
-  (env)~/django_projects/finesauces$ pip install -r requirements.txt<br><br>
-</p>
+  file:
+  
+  ***``Ubuntu 20.04.5 LTS terminal``***
+  ```
+  (env)~/django_projects/finesauces$ pip install -r requirements.txt
+  ```
 
 ### 3.1 Settings and migrations
 
-<p>
   Let’s create a <i>local_settings.py</i> file to store project sensitive information. Move into
-  <i>finesauces_project</i> folder:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
-  (env)~/django_projects/finesauces$ cd finesauces_project/<br><br>
-  Create <i>local_settings.py</i> file by using the following command:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
-  (env)~/django_projects/finesauces/finesauces_project$ sudo nano local_settings.py<br><br>
+  <i>finesauces_project</i> folder:
+  
+  ***``Ubuntu 20.04.5 LTS terminal``***
+  ```
+  (env)~/django_projects/finesauces$ cd finesauces_project/
+  ```
+  
+  Create <i>local_settings.py</i> file by using the following command:
+  
+  ***``Ubuntu 20.04.5 LTS terminal``***
+  ```
+  (env)~/django_projects/finesauces/finesauces_project$ sudo nano local_settings.py
+  ```
+  
   Paste in the contents from your local machine <i>local_settings.py</i> file and update <i>DEBUG</i>
-  field to <i>False</i> and add your <i>Droplet</i> IP address to the <i>ALLOWED_HOSTS</i> list:<br><br>
-  #...<br>
-  # SECURITY WARNING: don't run with debug turned on in production!<br>
-  DEBUG = <strong>False</strong><br>
-  ALLOWED_HOSTS = [<strong>'104.131.185.203'</strong>]<br>
-  #...<br><br>
-  Now we need to move back to the finesauces directory:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
-  (env)~/django_projects/finesauces/finesauces_project$ cd ..<br><br>
-  and run initial migrations for our project:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
-  (env)~/django_projects/finesauces$ python manage.py migrate<br><br>
-  If everything was set up correctly, you should see the following output in the terminal:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
-  Operations to perform:<br>
-  &nbsp;&nbsp; Apply all migrations: account, admin, auth, contenttypes, listings, orders, sessions<br>
-  Running migrations:<br>
-  &nbsp;&nbsp; Applying contenttypes.0001_initial... OK<br>
-  &nbsp;&nbsp; Applying auth.0001_initial... OK<br>
-  &nbsp;&nbsp; Applying account.0001_initial... OK<br>
-  &nbsp;&nbsp; Applying admin.0001_initial... OK<br>
-  &nbsp;&nbsp; Applying admin.0002_logentry_remove_auto_add... OK<br>
-  &nbsp;&nbsp; Applying admin.0003_logentry_add_action_flag_choices... OK<br>
-  &nbsp;&nbsp; Applying contenttypes.0002_remove_content_type_name... OK<br>
-  &nbsp;&nbsp; Applying auth.0002_alter_permission_name_max_length... OK<br>
-  &nbsp;&nbsp; Applying auth.0003_alter_user_email_max_length... OK<br>
-  &nbsp;&nbsp; Applying auth.0004_alter_user_username_opts... OK<br>
-  &nbsp;&nbsp; Applying auth.0005_alter_user_last_login_null... OK<br>
-  &nbsp;&nbsp; Applying auth.0006_require_contenttypes_0002... OK<br>
-  &nbsp;&nbsp; Applying auth.0007_alter_validators_add_error_messages... OK<br>
-  &nbsp;&nbsp; Applying auth.0008_alter_user_username_max_length... OK<br>
-  &nbsp;&nbsp; Applying auth.0009_alter_user_last_name_max_length... OK<br>
-  &nbsp;&nbsp; Applying auth.0010_alter_group_name_max_length... OK<br>
-  &nbsp;&nbsp; Applying auth.0011_update_proxy_permissions... OK<br>
-  &nbsp;&nbsp; Applying auth.0012_alter_user_first_name_max_length... OK<br>
-  &nbsp;&nbsp; Applying listings.0001_initial... OK<br>
-  &nbsp;&nbsp; Applying listings.0002_auto_20201019_1104... OK<br>
-  &nbsp;&nbsp; Applying orders.0001_initial... OK<br>
-  &nbsp;&nbsp; Applying orders.0002_order_user... OK<br>
-  &nbsp;&nbsp; Applying sessions.0001_initial... OK<br><br>
-  Now let’s create our superuser with the <i>createsuperuser</i> command:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
-  (env)~/django_projects/finesauces$ python manage.py createsuperuser<br><br>
-  Prepare static files to be served by the server:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
-  (env)~/django_projects/finesauces$ python manage.py collectstatic<br><br>
-</p>
+  field to <i>False</i> and add your <i>Droplet</i> IP address to the <i>ALLOWED_HOSTS</i> list:
+  
+  ```
+  #...
+  # SECURITY WARNING: don't run with debug turned on in production!
+  DEBUG = False
+  ALLOWED_HOSTS = ['104.131.185.203']
+  #...
+  ```
+  
+  Now we need to move back to the finesauces directory:
+  
+  ***``Ubuntu 20.04.5 LTS terminal``***
+  ```
+  (env)~/django_projects/finesauces/finesauces_project$ cd ..
+  ```
+  
+  and run initial migrations for our project:
+  
+  ***``Ubuntu 20.04.5 LTS terminal``***
+  ```
+  (env)~/django_projects/finesauces$ python manage.py migrate
+  ```
+  
+  If everything was set up correctly, you should see the following output in the terminal:
+  
+  ***``Ubuntu 20.04.5 LTS terminal``***
+  ```
+  Operations to perform:
+    Apply all migrations: account, admin, auth, contenttypes, listings, orders, sessions
+  Running migrations:
+    Applying contenttypes.0001_initial... OK<br>
+    Alying auth.0001_initial... OK
+    Aplying account.0001_initial... OK
+    Aplying admin.0001_initial... OK
+    Aplying admin.0002_logentry_remove_auto_add... OK
+    Applying admin.0003_logentry_add_action_flag_choices... OK
+    Applying contenttypes.0002_remove_content_type_name... OK
+    Applying auth.0002_alter_permission_name_max_length... OK
+    Applying auth.0003_alter_user_email_max_length... OK
+    Applying auth.0004_alter_user_username_opts... OK
+    Applying auth.0005_alter_user_last_login_null... OK
+    Applying auth.0006_require_contenttypes_0002... OK
+    Applying auth.0007_alter_validators_add_error_messages... OK
+    Applying auth.0008_alter_user_username_max_length... OK
+    Applying auth.0009_alter_user_last_name_max_length... OK
+    Applying auth.0010_alter_group_name_max_length... OK
+    Applying auth.0011_update_proxy_permissions... OK
+    Applying auth.0012_alter_user_first_name_max_length... OK
+    Applying listings.0001_initial... OK
+    Applying listings.0002_auto_20201019_1104... OK
+    Applying orders.0001_initial... OK
+    Applying orders.0002_order_user... OK
+    Applying sessions.0001_initial... OK
+  ```
+  
+  Now let’s create our superuser with the <i>createsuperuser</i> command:
+  
+  ***``Ubuntu 20.04.5 LTS terminal``***
+  ```
+  (env)~/django_projects/finesauces$ python manage.py createsuperuser
+  ```
+  
+  Prepare static files to be served by the server:
+  
+  ***``Ubuntu 20.04.5 LTS terminal``***
+  ```
+  (env)~/django_projects/finesauces$ python manage.py collectstatic
+  ```
 
 ## 4 Gunicorn setup
 
 <p>
   Let’s install Gunicorn by using the <i>pip</i> package manager:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  ***``Ubuntu 20.04.5 LTS terminal``***
   (env)~/django_projects/finesauces$ pip install gunicorn<br><br>
   After a successful installation, we can deactivate the virtual environment:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  ***``Ubuntu 20.04.5 LTS terminal``***
   (env)~/django_projects/finesauces$ deactivate<br><br>
   To implement a way to start and stop our application server, we will create <i>system service</i>
   and <i>socket</i> files. The Gunicorn socket will be created at boot and will listen for connections.
   When a connection occurs, the system will automatically start the Gunicorn process to
   handle the connection.
   Open systemd socket file for Gunicorn called <i>gunicorn.socket</i>:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  ***``Ubuntu 20.04.5 LTS terminal``***
   ~/django_projects/finesauces$ sudo nano /etc/systemd/system/gunicorn.socket<br><br>
   Inside, we will create a <i>[Unit]</i> section to describe the socket, a <i>[Socket]</i> section to define
   the socket location, and an <i>[Install]</i> section to make sure the socket is created at the right
   time. Paste in the following code and save the file once done:<br><br>
-  <strong><i>/etc/systemd/system/gunicorn.socket</i></strong><br>
+  ***``/etc/systemd/system/gunicorn.socket``***
   [Unit]<br>
   Description=gunicorn socket<br><br>
   [Socket]<br>
@@ -567,10 +615,10 @@
   [Install]<br>
   WantedBy=sockets.target<br><br>
   Now create and open gunicorn.service file:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  ***``Ubuntu 20.04.5 LTS terminal``***
   ~/django_projects/finesauces$ sudo nano /etc/systemd/system/gunicorn.service<br><br>
   Copy this code, paste it in and save the file:<br><br>
-  <strong><i>/etc/systemd/system/gunicorn.service</i></strong><br>
+  ***``/etc/systemd/system/gunicorn.service``***
   [Unit]<br>
   Description=gunicorn daemon<br>
   Requires=gunicorn.socket<br>
@@ -602,18 +650,18 @@
   specified 3 worker processes in this case.<br><br>
   <i>[Install]</i> section will tell system what to link this service to if we enable it to start at boot.<br><br>
   We can now start and enable Gunicorn socket:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  ***``Ubuntu 20.04.5 LTS terminal``***
   ~/django_projects/finesauces$ sudo systemctl start gunicorn.socket<br>
   ~/django_projects/finesauces$ sudo systemctl enable gunicorn.socket<br><br>
   After running the <i>enable</i> command, you should see the similar output:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  ***``Ubuntu 20.04.5 LTS terminal``***
   Created symlink /etc/systemd/system/sockets.target.wants/gunicorn.socket →<br>
   /etc/systemd/system/gunicorn.socket.<br><br>
   Check the status of gunicorn to confirm whether it was able to start:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  ***``Ubuntu 20.04.5 LTS terminal``***
   ~/django_projects/finesauces$ sudo systemctl status gunicorn.socket<br><br>
   If everything was set up properly, you should see similar output:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  ***``Ubuntu 20.04.5 LTS terminal``***
   ● gunicorn.socket - gunicorn socket<br>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Loaded: loaded (/etc/systemd/system/gunicorn.socket; enabled; vendor preset: enabled)<br>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Active: active (listening) since Sun 2021-01-03 20:11:09 UTC; 22s ago<br>
@@ -632,11 +680,11 @@
   Now that Gunicorn is set up, we need to configure Nginx to pass traffic to the process.
   We will start by creating and opening a new server block in Nginx’s <i>sites-available</i>
   directory:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  ***``Ubuntu 20.04.5 LTS terminal``***
   ~/django_projects/finesauces$ sudo nano /etc/nginx/sites-available/finesauces<br><br>
   Paste in the following code. Make sure you provide your Droplet IP address in the 
   <i>server_name</i> attribute:<br><br>
-  <strong><i>/etc/nginx/sites-available/finesauces</i></strong><br>
+  ***``/etc/nginx/sites-available/finesauces``***
   server {<br>
   &nbsp;&nbsp;&nbsp;&nbsp;listen 80;<br>
   &nbsp;&nbsp;&nbsp;&nbsp;server_name 104.131.185.203;<br><br>
@@ -661,35 +709,35 @@
   included with the Nginx installation, and then we will pass the traffic directly to the
   Gunicorn socket.<br>
   Enable this file by linking it to the <i>sites-enabled</i> dir:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  ***``Ubuntu 20.04.5 LTS terminal``***
   ~/django_projects/finesauces$ sudo ln -s /etc/nginx/sites-available/finesauces
   /etc/nginx/sites-enabled<br><br>
   Test NGINX config:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  ***``Ubuntu 20.04.5 LTS terminal``***
   ~/django_projects/finesauces$ sudo nginx -t<br><br>
   You should see the following output:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  ***``Ubuntu 20.04.5 LTS terminal``***
   nginx: the configuration file /etc/nginx/nginx.conf syntax is ok<br>
   nginx: configuration file /etc/nginx/nginx.conf test is successful<br><br>
   Restart NGINX:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  ***``Ubuntu 20.04.5 LTS terminal``***
   ~/django_projects/finesauces$ sudo systemctl restart nginx<br><br>
   Open up our firewall to allow normal traffic on port 80:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  ***``Ubuntu 20.04.5 LTS terminal``***
   ~/django_projects/finesauces$ sudo ufw allow 'Nginx Full'<br><br>
   This should be the terminal output:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  ***``Ubuntu 20.04.5 LTS terminal``***
   Rule added<br>
   Rule added (v6)<br><br>
   Now we can start rabbitmq-server and Celery:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  ***``Ubuntu 20.04.5 LTS terminal``***
   ~/django_projects/finesauces$ sudo rabbitmq-server<br><br>
   You will probably receive notification that <i>rabbitmq-server</i> is already running:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  ***``Ubuntu 20.04.5 LTS terminal``***
   ERROR: node with name "rabbit" already running on "ubuntu-s-1vcpu-1gb-nyc3-01"<br><br>
   To start Celery task manager, make sure your virtual environment is active, and you are
   within your main project directory folder:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  ***``Ubuntu 20.04.5 LTS terminal``***
   (env)~/django_projects/finesauces$ celery -A finesauces_project worker -l info<br><br>
   Our e-commerce project is now successfully deployed. Let’s try to access our site by using 
   Droplet IP address http://104.131.185.203/.
@@ -709,18 +757,18 @@
   value. In my case, that would be <i>finesauces.store</i>.<br><br>
   Now we need to return to <i>local_settings.py</i> and update </i>ALLOWED_HOSTS to include our
   domain:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  ***``Ubuntu 20.04.5 LTS terminal``***
   ~/django_projects/finesauces/finesauces_project$ sudo nano local_settings.py<br><br>
   Add the domain in the following way:<br><br>
   ALLOWED_HOSTS = ['104.131.185.203', <strong>'finesauces.store', 'www.finesauces.store'</strong>]<br><br>
   We also need to update <i>/etc/nginx/sites-available/finesauces</i> file to include our domain:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  ***``Ubuntu 20.04.5 LTS terminal``***
   ~/django_projects/finesauces$ sudo nano /etc/nginx/sites-available/finesauces<br><br>
   Add our domain like this next to our Droplet’s IP address:<br><br>
-  <strong><i>/etc/nginx/sites-available/finesauces</i></strong><br>
+  ***``/etc/nginx/sites-available/finesauces``***
   server_name 104.131.185.203 <strong>finesauces.store www.finesauces.store;</strong><br><br>
   Reload NGINX & Gunicorn for updates to take effect:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  ***``Ubuntu 20.04.5 LTS terminal``***
   ~/django_projects/finesauces$ sudo systemctl restart nginx<br>
   ~/django_projects/finesauces$ sudo systemctl restart gunicorn<br><br>
   Our e-commerce site is now available at <a href="http://finesauces.store/">http://finesauces.store/</a>.
@@ -737,18 +785,18 @@
   To set up an SSL certificate and enable HTTPS, we will now install a certification tool
   called <a href="https://certbot.eff.org/">Certbot</a>, which is a free and open-source tool for using <a href="https://letsencrypt.org/">Let’s Encrypt</a> certificates 
   on manually-administered websites. Use the following command for installation:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  ***``Ubuntu 20.04.5 LTS terminal``***
   ~$ sudo snap install --classic certbot<br><br>
   After successful installation, you should see the following output:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  ***``Ubuntu 20.04.5 LTS terminal``***
   certbot 1.9.0 from Certbot Project (certbot-eff✓) installed<br><br>
   Let’s run the following command to obtain a certificate and have Certbot edit our Nginx 
   configuration automatically to serve it, turning on HTTPS access in a single step:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  ***``Ubuntu 20.04.5 LTS terminal``***
   ~$ sudo certbot --nginx<br><br>
   Go through the terminal prompts. When asked about domain names for which you would
   like to activate HTTPS:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  ***``Ubuntu 20.04.5 LTS terminal``***
   Which names would you like to activate HTTPS for?<br>
   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -<br>
   1: finesauces.store<br>
@@ -758,7 +806,7 @@
   blank to select all options shown (Enter 'c' to cancel):<br><br>
   leave the input blank and press Enter to select all of the options. As a final step, test
   automatic certificate renewal by using the following command:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  ***``Ubuntu 20.04.5 LTS terminal``***
   ~$ sudo certbot renew --dry-run<br><br>
   Certificates will be renewed automatically before they expire. We will not need to run 
   Certbot again, unless we change the configuration.<br><br>
