@@ -210,6 +210,21 @@
   <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
   ~$ sudo ufw enable<br><br>
   When asked about proceeding further, select y:<br><br>
+  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  Command may disrupt existing ssh connections. Proceed with operation (y|n)? y<br>
+  Firewall is active and enabled on system startup<br><br>
+  Let’s check the status of our firewall to confirm everything is working:<br><br>
+  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  ~$ sudo ufw status<br><br>
+  The following confirmation should appear in your terminal:<br><br>
+  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  Status: active<br>
+  To Action From<br>
+  -- ------ ----<br>
+  OpenSSH ALLOW Anywhere<br>
+  OpenSSH (v6) ALLOW Anywhere (v6)<br><br>
+  As the firewall is currently blocking all connections except for SSH, if you install and
+  configure additional services, you will need to adjust the firewall settings to allow traffic in.
 </p>
 
 <p>
