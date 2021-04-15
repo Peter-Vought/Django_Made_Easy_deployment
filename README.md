@@ -49,24 +49,31 @@
   macOS/Linux. If unsure, follow this <a href="https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh">guide</a>. 
   For macOS and Linux, open your terminal and type the following command:
   
-  <strong><i>``terminal``</i></strong><br>
-  ``~$ ssh-keygen``<br><br>
+  ***``terminal``***
+  ```
+  ~$ ssh-keygen
+  ```
   By default, we will be offered to create id_rsa and id_rsa.pub files. I prefer to keep my ssh
   keys separated, so I will specify a different name for these files:
   
-  <strong><i>``terminal``</i></strong><br>
-  ``Generating public/private rsa key pair.``<br>
-  ``Enter file in which to save the key (/Users/peter/.ssh/id_rsa): .ssh/id_rsa_do``
+  ***``terminal``***
+  ```
+  Generating public/private rsa key pair.
+  Enter file in which to save the key (/Users/peter/.ssh/id_rsa): .ssh/id_rsa_do
+  ```
   
   And following private and public ssh keys are generated for me:
-  
-  ``~/.ssh/id_rsa_do``<br>
-  ``~/.ssh/id_rsa_do.pub``
+  ```
+  ~/.ssh/id_rsa_do``<br>
+  ~/.ssh/id_rsa_do.pub
+  ```
   
   Let’s copy the contents of the id_rsa.pub key by using the following command:
   
-  <strong><i>``terminal``</i></strong><br>
-  ``~$ cat ~/.ssh/id_rsa_do.pub``
+  ***``terminal``***
+  ```
+  ~$ cat ~/.ssh/id_rsa_do.pub
+  ```
   
   This command will reveal the content of our public ssh key file in the terminal. Return
   back to DigitalOcean, click on New SSH Key, and paste the content to the SSH key window.
@@ -107,10 +114,12 @@
   
   Upon successfully logging into our server, we are greeted by the following report:
   
-  <strong><i>``Ubuntu 20.04.5 LTS terminal``</i></strong><br>
-  ``Welcome to Ubuntu 20.04.1 LTS (GNU/Linux 5.4.0-51-generic x86_64)``<br><br>
-  ``  * Documentation: https://help.ubuntu.com``<br>
-  ``  * Management: https://landscape.canonical.com``<br>
+  ***``Ubuntu 20.04.5 LTS terminal``***
+  ```
+  Welcome to Ubuntu 20.04.1 LTS (GNU/Linux 5.4.0-51-generic x86_64)
+   * Documentation: https://help.ubuntu.com
+   * Management: https://landscape.canonical.com
+  ```
   &nbsp;* Support: https://ubuntu.com/advantage<br><br>
   &nbsp;&nbsp; System information as of Sun Jan 3 19:15:11 UTC 2021<br><br>
   &nbsp;&nbsp; System load: 0.0 Users logged in: 0<br>
