@@ -13,6 +13,7 @@
 * [5 NGINX setup](#5-nginx-setup)
 * [6 Domain setup](#6-domain-setup)
 * [7 Setting up SSL certificate](#7-setting-up-ssl-certificate)
+<hr>
 <p>
   The deployment process might get tricky, and opportunities for error are easy to find. The
   following text serves as a step-by-step deployment guide and is based on
@@ -49,13 +50,13 @@
 
 ### 1.2 Creating SSH key
 
-<p>
+
   We don’t have any SSH keys available as of now. Let’s go ahead and create one. In case
   you are running Windows, the ssh key creation process might be slightly different to
   macOS/Linux. If unsure, follow this <a href="https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh">guide</a>. 
   For macOS and Linux, open your terminal and type the following command:<br><br>
   <strong><i>terminal</i></strong><br>
-  ~$ ssh-keygen<br><br>
+  ``~$ ssh-keygen``<br><br>
   By default, we will be offered to create id_rsa and id_rsa.pub files. I prefer to keep my ssh
   keys separated, so I will specify a different name for these files:<br><br>
   <strong><i>terminal</i></strong><br>
@@ -72,7 +73,7 @@
   Provide some name for this key. Once done with these steps, click on Add SSH Key to add a new SSH key to our account.
   Let’s finish this setup by creating our Droplet by clicking on the Create Droplet button
   down below.
-</p>
+
 
 ### 1.3 Logging into Droplet
 
