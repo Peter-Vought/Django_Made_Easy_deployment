@@ -413,7 +413,7 @@
   Create a user for the database (I will use the same credentials here as on my local machine
   during development):
   
-  ***``postgres terminal</i>``***
+  ***``postgres terminal``***
   ```
   postgres=# CREATE USER finesaucesadmin WITH PASSWORD '********';
   ```
@@ -445,17 +445,23 @@
 
 ## 3 Virtual environment
 
-<p>
   Before cloning up our project from the remote repository, we need to set up our virtual
   environment. To do so, we first have to install the python3 <i>venv</i> package. Install the
-  package by typing:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
-  ~$ sudo apt-get install python3-venv<br><br>
+  package by typing:
+  
+  ***``Ubuntu 20.04.5 LTS terminal``***
+  ```
+  ~$ sudo apt-get install python3-venv
+  ```
+  
   After installing the <i>venv</i> package, we can proceed by creating and moving into our
-  <i>django_projects</i> project directory, where our current and future projects will reside:<br><br>
-  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
-  ~$ mkdir django_projects<br>
-  ~$ cd django_projects<br><br>
+  <i>django_projects</i> project directory, where our current and future projects will reside:
+  
+  ***``Ubuntu 20.04.5 LTS terminal``***
+  ```
+  ~$ mkdir django_projects
+  ~$ cd django_projects
+  ```
   When inside our new project directory, clone remote repository (replace the link with your
   repository URL):<br><br>
   <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
