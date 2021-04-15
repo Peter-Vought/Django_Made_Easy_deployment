@@ -784,6 +784,7 @@
   ```
   
   Restart NGINX:
+  
   ***``Ubuntu 20.04.5 LTS terminal``***
   ```
   ~/django_projects/finesauces$ sudo systemctl restart nginx
