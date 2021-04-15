@@ -64,7 +64,7 @@
   
   And following private and public ssh keys are generated for me:
   ```
-  ~/.ssh/id_rsa_do``<br>
+  ~/.ssh/id_rsa_do
   ~/.ssh/id_rsa_do.pub
   ```
   
@@ -86,31 +86,41 @@
   Let’s try connecting to our Droplet. Open terminal and type the following command
   (replace <i>104.131.185.203</i> with your IP address):
   
-  <strong><i>``terminal``</i></strong><br>
-  ``~$ ssh root@104.131.185.203``
+  ***``terminal``***
+  ```
+  ~$ ssh root@104.131.185.203
+  ```
   
   When logging in for the first time, you will most probably receive the following
   notification:
   
-  <strong><i>``terminal``</i></strong><br>
-  ``The authenticity of host '104.131.185.203 (104.131.185.203)' can't be established.``<br>
-  ``ECDSA key fingerprint is SHA256:B8ePWNEy7jjmhamtQkHi1w6HsumydXKxftmrWD4ufj8.``<br>
-  ``Are you sure you want to continue connecting (yes/no/[fingerprint])? Yes``<br>
+  ***``terminal``***
+  ```
+  The authenticity of host '104.131.185.203 (104.131.185.203)' can't be established.
+  ECDSA key fingerprint is SHA256:B8ePWNEy7jjmhamtQkHi1w6HsumydXKxftmrWD4ufj8.
+  Are you sure you want to continue connecting (yes/no/[fingerprint])? Yes
+  ```
   
   You might also receive the following message:
   
-  <strong><i>``terminal``</i></strong><br>
-  ``root@ 104.131.185.203: Permission denied(publickey)``<br>
+  ***``terminal``***
+  ```
+  root@ 104.131.185.203: Permission denied(publickey)
+  ```
   
   In this case, run the following command to add the key to ssh-agent:
   
-  <strong><i>``terminal``</i></strong><br>
-  ``~$ ssh-add ~/.ssh/id_rsa_do``<br>
+  ***``terminal``***
+  ```
+  ~$ ssh-add ~/.ssh/id_rsa_do
+  ```
   
   and try to connect again:
   
-  <strong><i>``terminal``</i></strong><br>
-  ``~$ ssh root@104.131.185.203``<br>
+  ***``terminal``***
+  ```
+  ~$ ssh root@104.131.185.203
+  ```
   
   Upon successfully logging into our server, we are greeted by the following report:
   
@@ -119,25 +129,30 @@
   Welcome to Ubuntu 20.04.1 LTS (GNU/Linux 5.4.0-51-generic x86_64)
    * Documentation: https://help.ubuntu.com
    * Management: https://landscape.canonical.com
+   * Support: https://ubuntu.com/advantage
+
+    System information as of Sun Jan 3 19:15:11 UTC 2021
+    
+    System load:  0.0 Users logged in: 0
+    Usage of /:   5.1% of 24.06GB IPv4 address for eth0: 104.131.185.20
+    Memory usage: 19% IPv4 address for eth0: 10.17.0.5
+    Swap usage:   0% IPv4 address for eth1: 10.108.0.2
+    Processes:    100
+    
+  1 update can be installed immediately.
+  0 of these updates are security updates.
+  To see these additional updates run: apt list --upgradable
+  
+  The list of available updates is more than a week old.
+  To check for new updates run: sudo apt update
+  
+  The programs included with the Ubuntu system are free software;
+  the exact distribution terms for each program are described in the
+  individual files in /usr/share/doc/*/copyright.
+  
+  Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+  applicable law.
   ```
-  &nbsp;* Support: https://ubuntu.com/advantage<br><br>
-  &nbsp;&nbsp; System information as of Sun Jan 3 19:15:11 UTC 2021<br><br>
-  &nbsp;&nbsp; System load: 0.0 Users logged in: 0<br>
-  &nbsp;&nbsp; Usage of /: 5.1% of 24.06GB IPv4 address for eth0: 104.131.185.203<br>
-  &nbsp;&nbsp; Memory usage: 19% IPv4 address for eth0: 10.17.0.5<br>
-  &nbsp;&nbsp; Swap usage: 0% IPv4 address for eth1: 10.108.0.2<br>
-  &nbsp;&nbsp; Processes: 100<br><br>
-  1 update can be installed immediately.<br>
-  0 of these updates are security updates.<br>
-  To see these additional updates run: apt list --upgradable<br><br>
-  The list of available updates is more than a week old.<br>
-  To check for new updates run: sudo apt update<br><br>
-  The programs included with the Ubuntu system are free software;<br>
-  the exact distribution terms for each program are described in the<br>
-  individual files in /usr/share/doc/*/copyright.<br><br>
-  Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by<br>
-  applicable law.<br>
-</p>
 
 ### 1.4 Creating new user and updating security settings
 
