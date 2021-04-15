@@ -120,7 +120,7 @@
   applicable law.<br>
 </p>
 
-### 1.4 Creating a new user and updating security settings
+### 1.4 Creating new user and updating security settings
 
 <p>
   We don’t want to use the root user for handling our project on the server for security
@@ -578,7 +578,7 @@
   Our e-commerce site is now available at <a href="http://finesauces.store/">http://finesauces.store/</a>.
 </p>
 
-## 7 Setting up an SSL certificate
+## 7 Setting up SSL certificate
 
 <p>
   The core function of an SSL certificate is to protect server-client communication. Upon
