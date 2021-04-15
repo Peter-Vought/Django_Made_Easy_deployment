@@ -16,14 +16,14 @@
   custom domain setup and adding an SSL certificate to our website.
 </p>
 
-<h2>VPS access and security</h2>
+<h2>1 VPS access and security</h2>
 
 <p>
   We will use the DigitalOcean cloud hosting provider to house our project. If you haven’t
   created your account yet, you can use this <a href="https://m.do.co/c/36d391016ef7">link</a> to register and get free $100 credit to start.
 </p>
 
-<h3>Creating Droplet</h3>
+<h3>1.1 Creating Droplet</h3>
 
 <p>
   Once registered and signed in, select Droplets from the dropdown menu. We are then redirected to the Droplet creation page. 
@@ -34,7 +34,7 @@
   the server.
 <p>
 
-<h3>Creating SSH key</h3>
+<h3>1.2 Creating SSH key</h3>
 
 <p>
   We don’t have any SSH keys available as of now. Let’s go ahead and create one. In case
@@ -61,7 +61,7 @@
   down below.
 </p>
 
-<h3>Logging into Droplet</h3>
+<h3>1.3 Logging into Droplet</h3>
 
 <p>
   Let’s try connecting to our Droplet. Open terminal and type the following command
@@ -107,7 +107,7 @@
   applicable law.<br>
 </p>
 
-<h3>Creating a new user and updating security settings</h3>
+<h3>1.4 Creating a new user and updating security settings</h3>
 
 <p>
   We don’t want to use the root user for handling our project on the server for security
@@ -169,6 +169,7 @@
   Press <i>CONTROL-X</i> to save the file. Confirm changes by pressing <i>Y</i>. Then press <i>ENTER</i> to
   confirm <i>file name: authorized_keys</i>.
 </p>
+
 <p>
   Now we should be able to log in as a new user. First disconnect from the server:<br><br>
   <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
@@ -181,6 +182,7 @@
   <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
   ~$ sudo nano /etc/ssh/sshd_config<br><br>
 </p>
+
 <p>
   Find the <i>PermitRootLogin</i> and <i>PasswordAuthentication</i> attributes and set them to <i>no</i>.
   Save the file, and let’s reload the SSHD service for changes to take effect:<br><br>
@@ -227,7 +229,8 @@
   configure additional services, you will need to adjust the firewall settings to allow traffic in.
 </p>
 
-<h2>Installing software</h2>
+<h2>2 Installing software</h2>
+
 <p>
   We will start by updating our server packages. Run the following commands to get up to
   date:<br><br>
@@ -256,7 +259,9 @@
   After this operation, 7695 kB of additional disk space will be used.<br>
   Do you want to continue? [Y/n] Y<br>
 </p>
-<h3>Database setup</h3>
+
+<h3>2.1 Database setup</h3>
+
 <p>
   Let’s set up our PostgreSQL database. Log in to the database session:<br><br>
   <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
@@ -282,7 +287,9 @@
   <strong><i>postgres terminal</i></strong><br>
   postgres=# \q<br><br>
 </p>
-<h2>Virtual environment</h2>
+
+<h2>3 Virtual environment</h2>
+
 <p>
   Before cloning up our project from the remote repository, we need to set up our virtual
   environment. To do so, we first have to install the python3 <i>venv</i> package. Install the
@@ -312,7 +319,9 @@
   <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
   (env)~/django_projects/finesauces$ pip install -r requirements.txt<br><br>
 </p>
-<h3>Settings and migrations</h3>
+
+<h3>3.1 Settings and migrations</h3>
+
 <p>
   Let’s create a <i>local_settings.py</i> file to store project sensitive information. Move into
   <i>finesauces_project</i> folder:<br><br>
@@ -369,7 +378,9 @@
   <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
   (env)~/django_projects/finesauces$ python manage.py collectstatic<br><br>
 </p>
-<h2>Gunicorn setup</h2>
+
+<h2>4 Gunicorn setup</h2>
+
 <p>
   Let’s install Gunicorn by using the <i>pip</i> package manager:<br><br>
   <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
@@ -453,7 +464,9 @@
   <br>
   Jan 03 20:11:09 ubuntu-s-1vcpu-1gb-nyc3-01 systemd[1]: Listening on gunicorn socket.<br><br>
 </p>
-<h2>NGINX setup</h2>
+
+<h2>5 NGINX setup</h2>
+
 <p>
   Now that Gunicorn is set up, we need to configure Nginx to pass traffic to the process.
   We will start by creating and opening a new server block in Nginx’s <i>sites-available</i>
@@ -520,7 +533,9 @@
   Our e-commerce project is now successfully deployed. Let’s try to access our site by using 
   Droplet IP address http://104.131.185.203/.
 </p>
-<h2>Domain setup</h2>
+
+<h2>6 Domain setup</h2>
+
 <p>
   To obtain a custom domain, we will need to use the service of a domain registrar. There
   are many options to choose from. One of them would be <a href="https://www.namecheap.com/">Namecheap</a>. You can use
@@ -549,7 +564,9 @@
   ~/django_projects/finesauces$ sudo systemctl restart gunicorn<br><br>
   Our e-commerce site is now available at <a href="http://finesauces.store/">http://finesauces.store/</a>.
 </p>
-<h2>Setting up an SSL certificate</h2>
+
+<h2>7 Setting up an SSL certificate</h2>
+
 <p>
   The core function of an SSL certificate is to protect server-client communication. Upon
   installing SSL, every bit of information is encrypted and turned into the undecipherable 
