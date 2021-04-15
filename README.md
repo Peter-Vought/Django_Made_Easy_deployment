@@ -192,5 +192,26 @@
   UFW to manage these applications by name. OpenSSH, the service allowing us to connect
   to our server now, has a profile registered with UFW. We can verify this by using the
   following command:<br><br>
+  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  ~$ sudo ufw app list<br><br>
+  You should see similar output:<br><br>
+  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  Available applications:
+   OpenSSH<br><br>
+  We need to make sure that the firewall allows SSH connections so that we can log back in
+  next time:<br><br>
+  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  ~$ sudo ufw allow OpenSSH<br><br>
+  You should see the following message:<br><br>
+  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  Rules updated<br>
+  Rules updated (v6)<br><br>
+  Now we need to enable firewall:<br><br>
+  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  ~$ sudo ufw enable<br><br>
+  When asked about proceeding further, select y:<br><br>
+</p>
 
+<p>
+  
 </p>
