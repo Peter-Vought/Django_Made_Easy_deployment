@@ -244,13 +244,14 @@
 
   Now we should be able to log in as a new user. First disconnect from the server:
   
-  ***Ubuntu 20.04.5 LTS terminal***
+  ***``Ubuntu 20.04.5 LTS terminal``***
   ```
   /home/finesaucesadmin/.ssh# exit
   ```
   
   And log in as a new user:
-  ***terminal***
+  
+  ***``terminal``***
   ```
   ~$ ssh finesaucesadmin@104.131.185.203
   ```
@@ -258,7 +259,7 @@
   After successfully logging in as a new user, we need to disable root login. Use the following
   command to open the SSHD config file:
   
-  ***Ubuntu 20.04.5 LTS terminal***
+  ***``Ubuntu 20.04.5 LTS terminal``***
   ```
   ~$ sudo nano /etc/ssh/sshd_config
   ```
@@ -285,7 +286,7 @@
   
   You should see similar output:
   
-  ***Ubuntu 20.04.5 LTS terminal***
+  ***``Ubuntu 20.04.5 LTS terminal``***
   ```
   Available applications:
     OpenSSH
