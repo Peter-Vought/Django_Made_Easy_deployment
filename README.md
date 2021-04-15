@@ -431,12 +431,12 @@
   <i>[Install]</i> section will tell system what to link this service to if we enable it to start at boot.<br><br>
   We can now start and enable Gunicorn socket:<br><br>
   <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
-  ~/django_projects/finesauces$ sudo systemctl start gunicorn.socket
+  ~/django_projects/finesauces$ sudo systemctl start gunicorn.socket<br>
   ~/django_projects/finesauces$ sudo systemctl enable gunicorn.socket<br><br>
   After running the <i>enable</i> command, you should see the similar output:<br><br>
   <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
   Created symlink /etc/systemd/system/sockets.target.wants/gunicorn.socket →<br>
-  /etc/systemd/system/gunicorn.socket.<br><br><br><br>
+  /etc/systemd/system/gunicorn.socket.<br><br>
   Check the status of gunicorn to confirm whether it was able to start:<br><br>
   <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
   ~/django_projects/finesauces$ sudo systemctl status gunicorn.socket<br><br>
@@ -504,7 +504,7 @@
   <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
   ~/django_projects/finesauces$ sudo ufw allow 'Nginx Full'<br><br>
   This should be the terminal output:<br><br>
-  strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
   Rule added<br>
   Rule added (v6)<br><br>
   Now we can start rabbitmq-server and Celery:<br><br>
@@ -548,6 +548,43 @@
   ~/django_projects/finesauces$ sudo systemctl restart nginx<br>
   ~/django_projects/finesauces$ sudo systemctl restart gunicorn<br><br>
   Our e-commerce site is now available at <a href="http://finesauces.store/">http://finesauces.store/</a>.
-
-
+</p>
+<h2>Setting up an SSL certificate</h2>
+<p>
+  The core function of an SSL certificate is to protect server-client communication. Upon
+  installing SSL, every bit of information is encrypted and turned into the undecipherable 
+  format. Valid SSL certification helps tremendously to establish a trustworthy experience 
+  for visitors, which is especially important for websites accepting payments. Popular search 
+  engines also seem to favor secured sites enabling HTTPS connection.<br><br>
+  To set up an SSL certificate and enable HTTPS, we will now install a certification tool
+  called <a href="https://certbot.eff.org/">Certbot</a>, which is a free and open-source tool for using <a href="https://letsencrypt.org/">Let’s Encrypt</a> certificates 
+  on manually-administered websites. Use the following command for installation:<br><br>
+  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  ~$ sudo snap install --classic certbot<br><br>
+  After successful installation, you should see the following output:<br><br>
+  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  certbot 1.9.0 from Certbot Project (certbot-eff✓) installed<br><br>
+  Let’s run the following command to obtain a certificate and have Certbot edit our Nginx 
+  configuration automatically to serve it, turning on HTTPS access in a single step:<br><br>
+  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  ~$ sudo certbot --nginx<br><br>
+  Go through the terminal prompts. When asked about domain names for which you would
+  like to activate HTTPS:<br><br>
+  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  Which names would you like to activate HTTPS for?<br>
+  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -<br>
+  1: finesauces.store<br>
+  2: www.finesauces.store<br>
+  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -<br>
+  Select the appropriate numbers separated by commas and/or spaces, or leave input
+  blank to select all options shown (Enter 'c' to cancel):<br><br>
+  leave the input blank and press Enter to select all of the options. As a final step, test
+  automatic certificate renewal by using the following command:<br><br>
+  <strong><i>Ubuntu 20.04.5 LTS terminal</i></strong><br>
+  ~$ sudo certbot renew --dry-run<br><br>
+  Certificates will be renewed automatically before they expire. We will not need to run 
+  Certbot again, unless we change the configuration.<br><br>
+  Our e-commerce site is now available at <a href="https://finesauces.store/">https://finesauces.store/</a>. HTTPS certificates are
+  in place, and a lock icon is displayed in the URL bar.<br><br>
+  The project is now complete and successfully deployed! 🥳
 </p>
