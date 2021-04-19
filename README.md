@@ -1,4 +1,5 @@
 # Django_Made_Easy_deployment 🚀
+deployment process for the e-commerce project from the [Django made Easy](https://www.amazon.com/dp/B08QTGY52M) book
 ## Table of contents
 [1 VPS access and security](#1-vps-access-and-security)<br>
 * [1.1 Creating Droplet](#11-creating-droplet)
